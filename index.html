@@ -1,12 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Portfolio</title>
+  <meta charset="UTF-8">
+  <title>코스모피디아 템플릿 생성기</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    input, textarea, button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+    }
+
+    #output {
+      white-space: pre-wrap;
+      background: #f3f3f3;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
-  <p>Hello, World!</p>
+  <h1>템플릿 생성기</h1>
+  <label for="">곡 제목</label>
+  <input type="text" id="song_title" placeholder="곡 제목을 입력하세요">
+  <button onclick="generate()">결과 생성</button>
+  <h2>결과</h2>
+  <div id="output"></div>
+  <script>
+    function generate() {
+      const song_title = document.getElementById("song_title").value;
+      const result = `||<-3>'''${song_title}''' ||`;
+      document.getElementById("output").textContent = result;
+    }
+  </script>
 </body>
 </html>

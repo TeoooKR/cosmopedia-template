@@ -1,0 +1,7 @@
+.vs/ProjectSettings.json
+*.config
+*.db
+*.db-shm
+*.vsidx
+*.db-wal
+*.sqlite
