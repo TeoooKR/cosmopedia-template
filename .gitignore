@@ -5,3 +5,4 @@
 *.vsidx
 *.db-wal
 *.sqlite
+*.json
