@@ -204,6 +204,7 @@
 	<button onclick="generate()">생성</button>
 
 	<h2>결과</h2>
+	<button onclick="copyOutput()">복사</button>
 	<div id="output" style="
 	font-family: monospace;
 	white-space: pre;
@@ -334,17 +335,14 @@
 				}
 			}
 			for (let i = 1; i <= 16; i++) {
-				if (difficulty_tuf === `U${i}`) {
+				if (difficulty_tuf === `U${i}` || difficulty_tuf === `U${i}J`) {
 					const g = Math.floor((i - 1) / 2);
 					const base = Math.floor(g / 2);
 					const suffix = (g % 2 === 1) ? 'p' : '';
 					difficulty_tuf_legacy = `21_${base}${suffix}`;
 					break;
 				}
-			}
-			if (difficulty_tuf == "U13J") {
-				difficulty_tuf_legacy = "21_3"
-			}
+			}			
 			if (difficulty_tuf_legacy != "") {
 				difficulty_tuf_legacy = " ([[파일:TUF Lc " + difficulty_tuf_legacy + ".png|width=30]])";
 			}
@@ -474,14 +472,32 @@ ${editor}||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 출시일}}}}}}''' ||
 		["P", "G", "U"].forEach(val => {
 			for (let i = 1; i <= 20; i++) {
 				addOptionToTUF(val + i);
-				if (val === "U" && i === 13) {
-					addOptionToTUF("U13J");
-				}
 			}
 		});
+		for (let i = 1; i <= 20; i++) {
+				addOptionToTUF("U" + i + "J");
+			}
+
+		for (let i = 4; i <= 8; i++) {
+			let plus = "";
+			if (i % 2 > 0) {
+				plus = "p";
+			}
+			addOptionToTUF(`Q${Math.floor(i / 2)}${plus}`);
+		}
+
 		["Unranked", "Qq", "Gimmick", "Censored", "Impossible", "ma", "Grande"].forEach(val => {
 			addOptionToTUF(val);
 		});
+		function copyOutput() {
+			const output = document.getElementById("output").innerText;
+			const temp = document.createElement("textarea");
+			temp.value = output;
+			document.body.appendChild(temp);
+			temp.select();
+			document.execCommand("copy");
+			document.body.removeChild(temp);
+		}
 	</script>
 </body>
 </html>
