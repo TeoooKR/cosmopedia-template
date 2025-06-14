@@ -36,7 +36,7 @@ function generate() {
             .map(name => `[[${name}]]`);
 
         if (role && names.length > 0) {
-            editor += `||<bgcolor=#000000><color=#FFFFFF> '''${role}''' ||<-2>${names.join(", ")} ||\n`;
+            editor += `||<bgcolor=#000000><color=#FFFFFF> '''${role}''' ||<-8>${names.join(", ")} ||\n`;
         }
     });
 
@@ -60,7 +60,16 @@ function generate() {
     const max_tile_bpm = document.getElementById("max_tile_bpm").value;
     const max_current_bpm = document.getElementById("max_current_bpm").value;
     const tile = document.getElementById("tile").value;
-    
+    let width = "30";
+
+    let speed_target = document.getElementById("speed_target").value;
+    if (document.getElementById("speed_target_checkbox").checked && speed_target != "") {
+        speed_target = ` ||<-12><width=20%> {{{-1 배속 목표}}}[br]'''{{{+3 x${speed_target}}}}'''`;
+        width = "20"
+    } else {
+        speed_target = "";
+    }
+
     let tag_count = 0;
     let tag = "";
 
@@ -73,18 +82,23 @@ function generate() {
 
     if (tag != "") {
         tag = `
-||<-3>[include(틀:레벨 태그${tag})] ||`;
+||<-12>[include(틀:레벨 태그${tag})] ||`;
     }
     
-    let difficulty_workshop = document.getElementById("difficulty_workshop").value;
+    let difficulty_workshop_index = document.getElementById("difficulty_workshop").value;
     let difficulty_workshop_color = "8AFFAB";
 
-    if (difficulty_workshop >= 4 && difficulty_workshop <= 6) {
+    if (difficulty_workshop_index >= 4 && difficulty_workshop_index <= 6) {
         difficulty_workshop_color = "FFEE6B";
-    } else if (difficulty_workshop >= 7 && difficulty_workshop <= 9) {
+    } else if (difficulty_workshop_index >= 7 && difficulty_workshop_index <= 9) {
         difficulty_workshop_color = "FF4257";
-    } else if (difficulty_workshop >= 10) {
+    } else if (difficulty_workshop_index >= 10) {
         difficulty_workshop_color = "FD8AFF";
+    }
+
+    let difficulty_workshop = `{{{#${difficulty_workshop_color} {{{+5 ${difficulty_workshop_index}}}}}}}`
+    if (difficulty_workshop_index == "-") {
+        difficulty_workshop = `{{{+5 ${difficulty_workshop_index}}}}`
     }
 
     let gg_quality = document.getElementById("gg_quality").value;
@@ -149,30 +163,45 @@ function generate() {
     } else {
         difficulty_tuf = "'''{{{+4 -}}}'''";
     }
-
+ 
     const workshop_link = document.getElementById("workshop_link")?.value.trim() || ""; 
     const gg_link = document.getElementById("gg_link")?.value.trim() || ""; 
     const tuf_link = document.getElementById("tuf_link")?.value.trim() || ""; 
 
+    let link = ""
+    let link_count = 0;
+    if (document.getElementById("workshop_link_checkbox").checked && workshop_link != "") {
+        link_count++
+        link += `,space${link_count}= | ,steam=${document.getElementById("workshop_link")?.value.trim() || ""}`
+    }
+    if (document.getElementById("gg_link_checkbox").checked && gg_link != "") {
+        link_count++
+        link += `,space${link_count}= | ,gg=${document.getElementById("gg_link")?.value.trim() || ""}`
+    }
+    if (document.getElementById("tuf_link_checkbox").checked && tuf_link != "") {
+        link_count++
+        link += `,space${link_count}= | ,tuf=${document.getElementById("tuf_link")?.value.trim() || ""}`
+    }
+    
     const result = `[include(틀:상위 문서,up=${song_title})]
-||<-3><tablealign=right><tablewidth=675><bgcolor=#000000><table bordercolor=#808080><color=#FFFFFF>{{{#!wiki style="margin: -5px -10px; padding: 6px 10px; background-image: linear-gradient(to right, #ffffff, #000000, #808080)"
+||<-12><tablealign=right><tablewidth=675><bgcolor=#000000><table bordercolor=#808080><color=#FFFFFF>{{{#!wiki style="margin: -5px -10px; padding: 6px 10px; background-image: linear-gradient(to right, #ffffff, #000000, #808080)"
 {{{#!wiki style="display: inline; text-shadow: 0 0 6px #000000; color:#fff"
 '''{{{+4 ${song_title}}}}'''[br]{{{+1 ${artist}}}}[br]${includes}}}}}}} ||
-||<-3><bgcolor=#000000><nopad> [youtube(${youtube_video_id},width=675,height=380)] ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작자}}}}}}''' ||
-||<-3>제작자 ||
-${editor}||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 출시일}}}}}}''' ||
-||<-3>${release_date_year}년 ${release_date_month}월 ${release_date_day}일 ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 정보}}}}}}''' ||
-||<width=30%> {{{-1 곡 길이}}}[br]'''{{{+3 ${song_length_minute}:${song_length_second}}}}''' ||<width=30%> {{{-1 BPM}}}[br]'''{{{+3 ${bpm}[* 최대 타일 BPM ${max_tile_bpm}, 체감 BPM ${max_current_bpm}]  ||<width=30%> {{{-1 타일 수}}}[br]'''{{{+3 ${tile}}}}''' ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 패턴}}}}}}''' ||${tag}
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 난이도}}}}}}''' ||
-|| {{{-1 창작마당}}}[br]'''{{{#${difficulty_workshop_color} {{{+5 ${difficulty_workshop}}}}}}}''' || {{{-1 ADOFAI.gg${gg_quality}}}}[br]${difficulty_gg} || {{{-1 TUF}}}[br]${difficulty_tuf}${difficulty_tuf_legacy} ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 튜토리얼}}}}}}''' ||
-||<-3>{{{+1 '''-1 한글'''}}}[br]{{{-2 -1 English}}}
+||<-12><bgcolor=#000000><nopad> [youtube(${youtube_video_id},width=675,height=380)] ||
+||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작자}}}}}}''' ||
+||<-12>제작자 ||
+${editor}||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 출시일}}}}}}''' ||
+||<-12>${release_date_year}년 ${release_date_month}월 ${release_date_day}일 ||
+||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 정보}}}}}}''' ||
+||<width=${width}%> {{{-1 곡 길이}}}[br]'''{{{+3 ${song_length_minute}:${song_length_second}}}}''' ||<width=${width}%> {{{-1 BPM}}}[br]'''{{{+3 ${bpm}[* 최대 타일 BPM ${max_tile_bpm}, 체감 BPM ${max_current_bpm}] ||<width=${width}%> {{{-1 타일 수}}}[br]'''{{{+3 ${tile}}}}'''${speed_target} ||
+||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 패턴}}}}}}''' ||${tag}
+||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 난이도}}}}}}''' ||
+|| {{{-1 창작마당}}}[br]'''${difficulty_workshop}''' || {{{-1 ADOFAI.gg${gg_quality}}}}[br]${difficulty_gg} || {{{-1 TUF}}}[br]${difficulty_tuf}${difficulty_tuf_legacy} ||
+||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 튜토리얼}}}}}}''' ||
+||<-12>{{{+1 '''-1 한글'''}}}[br]{{{-2 -1 English}}}
 {{{+1 '''-2 한글'''}}}[br]{{{-2 -2 English}}} ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 링크}}}}}}''' ||
-||<-3>[include(틀:레벨 주요 링크,youtube=${youtube_video_id},space1= | ,steam=${workshop_link},space2= | ,gg=${gg_link},space3= | ,tuf=${tuf_link},width=30)] ||
+||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 링크}}}}}}''' ||
+||<-12>[include(틀:레벨 주요 링크,youtube=${youtube_video_id}${link},width=30)] ||
 [clearfix]`;
 
     document.getElementById("output").textContent = result;
@@ -192,7 +221,7 @@ function addRoleField() {
 <div class="horizontal">
     <select onchange="toggleCustomRole(this)">
         <option value="트랙" ${defaultRole === "트랙" ? "selected" : ""}>트랙</option>
-        <option value="이펙트" ${defaultRole === "이펙트" ? "selected" : ""}>이펙트</option>
+        <option value="이펙트" ${defaultRole === "이펙트" ? "selected" : ""}>이펙트</option>    
         <option value="custom" ${defaultRole === "custom" ? "selected" : ""}>기타</option>
     </select>
     <input type="text" class="custom-role" placeholder="역할 입력" style="display: ${defaultRole === "custom" ? "inline-block" : "none"};">
@@ -238,6 +267,11 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("detailed_shift").addEventListener("change", function () {
     const detailedInput = document.getElementById("detailed_shift_input");
     detailedInput.style.display = this.checked ? "block" : "none";
+});
+
+document.getElementById("speed_target_checkbox").addEventListener("change", function () {
+    const speed_target = document.getElementById("speed_target");
+    speed_target.style.display = this.checked ? "block" : "none";
 });
 
 const select_workshop = document.getElementById("difficulty_workshop");
