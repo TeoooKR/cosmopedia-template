@@ -50,10 +50,9 @@ function generate() {
     }
 
     let bpm = document.getElementById("bpm").value;
-    let detailed_shift = document.getElementById("detailed_shift_text").value;
 
-    if (document.getElementById('detailed_shift').checked && detailed_shift !== "") {
-        bpm += "}}}'''[*변속 " + detailed_shift + "]";
+    if (document.getElementById('detailed_shift').checked) {
+        bpm += "}}}'''[*변속 " + document.getElementById("detailed_shift_text").value + "]";
     } else {
         bpm += "}}}'''";
     }
@@ -63,7 +62,7 @@ function generate() {
     let width = "30";
 
     let speed_target = document.getElementById("speed_target").value;
-    if (document.getElementById("speed_target_checkbox").checked && speed_target != "") {
+    if (document.getElementById("speed_target_checkbox").checked) {
         speed_target = ` ||<-12><width=20%> {{{-1 배속 목표}}}[br]'''{{{+3 x${speed_target}}}}'''`;
         width = "20"
     } else {
@@ -163,22 +162,35 @@ function generate() {
     } else {
         difficulty_tuf = "'''{{{+4 -}}}'''";
     }
- 
-    const workshop_link = document.getElementById("workshop_link")?.value.trim() || ""; 
-    const gg_link = document.getElementById("gg_link")?.value.trim() || ""; 
-    const tuf_link = document.getElementById("tuf_link")?.value.trim() || ""; 
+
+    let tutorialBlock = "";
+    let tutorialRows = "";
+
+    document.querySelectorAll(".tutorial-wrapper").forEach(wrapper => {
+        const kr = wrapper.querySelector(".tutorial-korean").value.trim();
+        const en = wrapper.querySelector(".tutorial-english").value.trim();
+        if (kr || en) {
+            tutorialRows += `{{{+1 '''${kr || "-"}'''}}}[br]{{{-2 ${en || "-"}}}}`;
+        }
+    });
+
+    if (tutorialRows !== "") {
+        tutorialBlock = `||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 튜토리얼}}}}}}''' ||
+||<-12>${tutorialRows} ||\n`;
+    }
+
 
     let link = ""
     let link_count = 0;
-    if (document.getElementById("workshop_link_checkbox").checked && workshop_link != "") {
+    if (document.getElementById("workshop_link_checkbox").checked) {
         link_count++
         link += `,space${link_count}= | ,steam=${document.getElementById("workshop_link")?.value.trim() || ""}`
     }
-    if (document.getElementById("gg_link_checkbox").checked && gg_link != "") {
+    if (document.getElementById("gg_link_checkbox").checked) {
         link_count++
         link += `,space${link_count}= | ,gg=${document.getElementById("gg_link")?.value.trim() || ""}`
     }
-    if (document.getElementById("tuf_link_checkbox").checked && tuf_link != "") {
+    if (document.getElementById("tuf_link_checkbox").checked) {
         link_count++
         link += `,space${link_count}= | ,tuf=${document.getElementById("tuf_link")?.value.trim() || ""}`
     }
@@ -197,10 +209,7 @@ ${editor}||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 출시일}}}}}}''' ||
 ||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 패턴}}}}}}''' ||${tag}
 ||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 난이도}}}}}}''' ||
 || {{{-1 창작마당}}}[br]'''${difficulty_workshop}''' || {{{-1 ADOFAI.gg${gg_quality}}}}[br]${difficulty_gg} || {{{-1 TUF}}}[br]${difficulty_tuf}${difficulty_tuf_legacy} ||
-||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 튜토리얼}}}}}}''' ||
-||<-12>{{{+1 '''-1 한글'''}}}[br]{{{-2 -1 English}}}
-{{{+1 '''-2 한글'''}}}[br]{{{-2 -2 English}}} ||
-||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 링크}}}}}}''' ||
+${tutorialBlock}||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 링크}}}}}}''' ||
 ||<-12>[include(틀:레벨 주요 링크,youtube=${youtube_video_id}${link},width=30)] ||
 [clearfix]`;
 
@@ -333,6 +342,28 @@ for (let i = 4; i <= 8; i++) {
 ["Unranked", "Qq", "Gimmick", "Censored", "Impossible", "ma", "Grande"].forEach(val => {
     addOptionToTUF(val);
 });
+
+function addTutorialField() {
+    const section = document.getElementById("tutorial-section");
+    const wrapper = document.createElement("div");
+    wrapper.className = "tutorial-wrapper";
+    wrapper.style.marginBottom = "10px";
+
+    wrapper.innerHTML = `
+    <div class="horizontal">
+        <input type="text" class="tutorial-korean" placeholder="한글 튜토리얼">
+        <input type="text" class="tutorial-english" placeholder="영문 튜토리얼">
+        <button type="button" onclick="removeTutorialField(this)">x</button>
+    </div>
+    `;
+
+    section.appendChild(wrapper);
+}
+
+function removeTutorialField(button) {
+    button.closest(".tutorial-wrapper").remove();
+}
+
 
 document.getElementById("workshop_link_checkbox").addEventListener("change", function () {
     const workshop_link = document.getElementById("workshop_link");

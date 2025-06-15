@@ -65,7 +65,7 @@
 
 	<label>배속 목표</label>
 	<input type="checkbox" id="speed_target_checkbox">
-	<input type="text" id="speed_target" placeholder="배속 목표를 입력하세요" style="display: none;">
+	<input type="text" id="speed_target" placeholder="배속 목표를 입력하세요 ex) 1.2" style="display: none;">
 
 	<label>레벨 태그</label>
 	<div class="horizontal">
@@ -132,6 +132,10 @@
 	<label>TUF 난이도</label>
 	<div class="horizontal">
 		<select id="difficulty_tuf" name="TUF 난이도"></select>
+	</div>
+
+	<div id="tutorial-section">
+		<label>튜토리얼 <button type="button" onclick="addTutorialField()">+</button></label>
 	</div>
 
 	<label>창작마당 링크</label>
