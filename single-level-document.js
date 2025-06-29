@@ -1,8 +1,4 @@
-let creatorType = "";
-let creatorValue = "";
-let lastCreatorType = "";
-
-function generate() {
+function generateSingleLevelDocument() {
     const song_title = document.getElementById("song_title").value;
     const artist = document.getElementById("artist").value;
 
@@ -213,7 +209,7 @@ ${tutorialBlock}||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 링크}
 ||<-12>[include(틀:레벨 주요 링크,youtube=${youtube_video_id}${link},width=30)] ||
 [clearfix]`;
 
-    document.getElementById("output").textContent = result;
+    document.getElementById("sld_output").textContent = result;
 }
 
 let roleCount = 0;
@@ -364,7 +360,6 @@ function removeTutorialField(button) {
     button.closest(".tutorial-wrapper").remove();
 }
 
-
 document.getElementById("workshop_link_checkbox").addEventListener("change", function () {
     const workshop_link = document.getElementById("workshop_link");
     workshop_link.style.display = this.checked ? "block" : "none";
@@ -377,13 +372,3 @@ document.getElementById("tuf_link_checkbox").addEventListener("change", function
     const tuf_link = document.getElementById("tuf_link");
     tuf_link.style.display = this.checked ? "block" : "none";
 });
-
-function copyOutput() {
-    const output = document.getElementById("output").innerText;
-    const temp = document.createElement("textarea");
-    temp.value = output;
-    document.body.appendChild(temp);
-    temp.select();
-    document.execCommand("copy");
-    document.body.removeChild(temp);
-}

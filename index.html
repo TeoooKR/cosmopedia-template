@@ -6,161 +6,216 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<script src="main.js" defer></script>
 	<h1>코스모피디아 템플릿 생성기</h1>
 
-	<label>곡 제목</label>
-	<input type="text" id="song_title" placeholder="곡 제목을 입력하세요">
+	<label>템플릿 선택</label>
+	<select id="select_template">
+		<option value="single_level_document" data-output="sld_output">단일 레벨 문서</option>
+		<option value="person" data-output="person_output">인물</option>
+	</select>
+	
+	<div id="single_level_document">
+		<label>곡 제목</label>
+		<input type="text" id="song_title" placeholder="곡 제목을 입력하세요">
 
-	<label>아티스트</label>
-	<input type="text" id="artist" placeholder="아티스트를 입력하세요">
+		<label>아티스트</label>
+		<input type="text" id="artist" placeholder="아티스트를 입력하세요">
 
-	<div class="horizontal">
-		<label><input type="checkbox" id="include_flash_warning"> 광과민성 경고 포함</label>
-		<label><input type="checkbox" id="include_noneffect"> 논이펙 포함</label>
-		<label><input type="checkbox" id="include_neocosmos"> Neo Cosmos 필요 포함</label>
-		<label><input type="checkbox" id="include_streammod"> YouTubeStream Mod 필요 포함</label>
-	</div>
+		<div class="horizontal">
+			<label><input type="checkbox" id="include_flash_warning"> 광과민성 경고 포함</label>
+			<label><input type="checkbox" id="include_noneffect"> 논이펙 포함</label>
+			<label><input type="checkbox" id="include_neocosmos"> Neo Cosmos 필요 포함</label>
+			<label><input type="checkbox" id="include_streammod"> YouTubeStream Mod 필요 포함</label>
+		</div>
 
-	<label>유튜브 영상 아이디</label>
-	<input type="text" id="youtube_video_id" placeholder="유튜브 영상 아이디를 입력하세요 ex) dQw4w9WgXcQ">
+		<label>유튜브 영상 아이디</label>
+		<input type="text" id="youtube_video_id" placeholder="유튜브 영상 아이디를 입력하세요 ex) dQw4w9WgXcQ">
 
-	<label>제작자 <button type="button" onclick="addRoleField()">+</button></label>
-	<div id="creator-section"></div>
+		<label>제작자 <button type="button" onclick="addRoleField()">+</button></label>
+		<div id="creator-section"></div>
 
-	<label>출시일</label>
-	<div class="horizontal">
-		<input type="text" id="release_date_year" placeholder="YYYY">
-		<label>년</label>
-		<input type="text" id="release_date_month" placeholder="MM">
-		<label>월</label>
-		<input type="text" id="release_date_day" placeholder="DD">
-		<label>일</label>
-	</div>
+		<label>출시일</label>
+		<div class="horizontal">
+			<input type="text" id="release_date_year" placeholder="YYYY">
+			<label>년</label>
+			<input type="text" id="release_date_month" placeholder="MM">
+			<label>월</label>
+			<input type="text" id="release_date_day" placeholder="DD">
+			<label>일</label>
+		</div>
 
-	<label>곡 길이</label>
-	<div class="horizontal">
-		<input type="text" id="song_length_minute" />
-		<label>분</label>
-		<input type="text" id="song_length_second" />
-		<label>초</label>
-	</div>
+		<label>곡 길이</label>
+		<div class="horizontal">
+			<input type="text" id="song_length_minute" />
+			<label>분</label>
+			<input type="text" id="song_length_second" />
+			<label>초</label>
+		</div>
 
-	<label>BPM</label>
-	<input type="text" id="bpm" placeholder="기본 BPM을 입력하세요(변속은 'OOO ~ OOO'로 표시)">
+		<label>BPM</label>
+		<input type="text" id="bpm" placeholder="기본 BPM을 입력하세요(변속은 'OOO ~ OOO'로 표시)">
 
-	<label> 상세 변속</label>
-	<input type="checkbox" id="detailed_shift">
-	<div id="detailed_shift_input" style="display: none;">
-		<input type="text" id="detailed_shift_text" placeholder="상세 변속을 입력하세요 ex) 120 → 160 → 180" />
-	</div>
+		<label> 상세 변속</label>
+		<input type="checkbox" id="detailed_shift">
+		<div id="detailed_shift_input" style="display: none;">
+			<input type="text" id="detailed_shift_text" placeholder="상세 변속을 입력하세요 ex) 120 → 160 → 180" />
+		</div>
 
-	<label>최대 타일 BPM</label>
-	<input type="text" id="max_tile_bpm" placeholder="최대 타일 BPM을 입력하세요">
+		<label>최대 타일 BPM</label>
+		<input type="text" id="max_tile_bpm" placeholder="최대 타일 BPM을 입력하세요">
 
-	<label>최대 체감 BPM</label>
-	<input type="text" id="max_current_bpm" placeholder="최대 체감 BPM을 입력하세요">
+		<label>최대 체감 BPM</label>
+		<input type="text" id="max_current_bpm" placeholder="최대 체감 BPM을 입력하세요">
 
-	<label>타일 수</label>
-	<input type="text" id="tile" placeholder="타일 수를 입력하세요">
+		<label>타일 수</label>
+		<input type="text" id="tile" placeholder="타일 수를 입력하세요">
 
-	<label>배속 목표</label>
-	<input type="checkbox" id="speed_target_checkbox">
-	<input type="text" id="speed_target" placeholder="배속 목표를 입력하세요 ex) 1.2" style="display: none;">
+		<label>배속 목표</label>
+		<input type="checkbox" id="speed_target_checkbox">
+		<input type="text" id="speed_target" placeholder="배속 목표를 입력하세요 ex) 1.2" style="display: none;">
 
-	<label>레벨 태그</label>
-	<div class="horizontal">
-		<label><input type="checkbox" id="Level_Tag_3_Pseudos" data-tag="3_Pseudos"> 3 Pseudos</label>
-		<label><input type="checkbox" id="Level_Tag_4plus_Pseudos" data-tag="4plus_Pseudos"> 4+ Pseudos</label>
-		<label><input type="checkbox" id="Level_Tag_64plus_Beats" data-tag="64plus_Beats"> 64+ Beats</label>
-		<label><input type="checkbox" id="Level_Tag_Acceleration" data-tag="Acceleration"> Acceleration</label>
-		<label><input type="checkbox" id="Level_Tag_Continuous_Polygons" data-tag="Continuous_Polygons"> Continuous Polygons</label>
-		<label><input type="checkbox" id="Level_Tag_Deceleration" data-tag="Deceleration"> Deceleration</label>
-	</div>
-	<div class="horizontal">
-		<label><input type="checkbox" id="Level_Tag_Distraction" data-tag="Distraction"> Distraction</label>
-		<label><input type="checkbox" id="Level_Tag_Freeroam" data-tag="Freeroam"> Freeroam</label>
-		<label><input type="checkbox" id="Level_Tag_Funky_Beats" data-tag="Funky_Beats"> Funky Beats</label>
-		<label><input type="checkbox" id="Level_Tag_Gallop" data-tag="Gallop"> Gallop</label>
-		<label><input type="checkbox" id="Level_Tag_Gimmick" data-tag="Gimmick"> Gimmick</label>
-		<label><input type="checkbox" id="Level_Tag_Hexagon" data-tag="Hexagon"> Hexagon</label>
-	</div>
-	<div class="horizontal">
-		<label><input type="checkbox" id="Level_Tag_Hold" data-tag="Hold"> Hold</label>
-		<label><input type="checkbox" id="Level_Tag_Magic_Shape" data-tag="Magic_Shape"> Magic Shape</label>
-		<label><input type="checkbox" id="Level_Tag_Memorization" data-tag="Memorization"> Memorization</label>
-		<label><input type="checkbox" id="Level_Tag_Midspin" data-tag="Midspin"> Midspin</label>
-		<label><input type="checkbox" id="Level_Tag_Multitap" data-tag="Multitap"> Multitap</label>
-		<label><input type="checkbox" id="Level_Tag_Octagon" data-tag="Octagon"> Octagon</label>
-	</div>
-	<div class="horizontal">
-		<label><input type="checkbox" id="Level_Tag_Polyrhythm" data-tag="Polyrhythm"> Polyrhythm</label>
-		<label><input type="checkbox" id="Level_Tag_Pseudo" data-tag="Pseudo"> Pseudo</label>
-		<label><input type="checkbox" id="Level_Tag_Quintuplet" data-tag="Quintuplet"> Quintuplet</label>
-		<label><input type="checkbox" id="Level_Tag_Septuplet" data-tag="Septuplet"> Septuplet</label>
-		<label><input type="checkbox" id="Level_Tag_Swing" data-tag="Swing"> Swing</label>
-		<label><input type="checkbox" id="Level_Tag_Timing_Window_Scale" data-tag="Timing_Window_Scale"> Timing Window Scale</label>
-	</div>
-	<div class="horizontal">
-		<label><input type="checkbox" id="Level_Tag_Timing_Window_Scale_DLC" data-tag="Timing_Window_Scale_DLC"> Timing Window Scale DLC</label>
-		<label><input type="checkbox" id="Level_Tag_Tresillo" data-tag="Tresillo"> Tresillo</label>
-		<label><input type="checkbox" id="Level_Tag_Triplet" data-tag="Triplet"> Triplet</label>
-		<label><input type="checkbox" id="Level_Tag_U-Turn" data-tag="U-Turn"> U-Turn</label>
-		<label><input type="checkbox" id="Level_Tag_Zips" data-tag="Zips"> Zips</label>
-	</div>
+		<label>레벨 태그</label>
+		<div class="horizontal">
+			<label><input type="checkbox" id="Level_Tag_3_Pseudos" data-tag="3_Pseudos"> 3 Pseudos</label>
+			<label><input type="checkbox" id="Level_Tag_4plus_Pseudos" data-tag="4plus_Pseudos"> 4+ Pseudos</label>
+			<label><input type="checkbox" id="Level_Tag_64plus_Beats" data-tag="64plus_Beats"> 64+ Beats</label>
+			<label><input type="checkbox" id="Level_Tag_Acceleration" data-tag="Acceleration"> Acceleration</label>
+			<label><input type="checkbox" id="Level_Tag_Continuous_Polygons" data-tag="Continuous_Polygons"> Continuous Polygons</label>
+			<label><input type="checkbox" id="Level_Tag_Deceleration" data-tag="Deceleration"> Deceleration</label>
+		</div>
+		<div class="horizontal">
+			<label><input type="checkbox" id="Level_Tag_Distraction" data-tag="Distraction"> Distraction</label>
+			<label><input type="checkbox" id="Level_Tag_Freeroam" data-tag="Freeroam"> Freeroam</label>
+			<label><input type="checkbox" id="Level_Tag_Funky_Beats" data-tag="Funky_Beats"> Funky Beats</label>
+			<label><input type="checkbox" id="Level_Tag_Gallop" data-tag="Gallop"> Gallop</label>
+			<label><input type="checkbox" id="Level_Tag_Gimmick" data-tag="Gimmick"> Gimmick</label>
+			<label><input type="checkbox" id="Level_Tag_Hexagon" data-tag="Hexagon"> Hexagon</label>
+		</div>
+		<div class="horizontal">
+			<label><input type="checkbox" id="Level_Tag_Hold" data-tag="Hold"> Hold</label>
+			<label><input type="checkbox" id="Level_Tag_Magic_Shape" data-tag="Magic_Shape"> Magic Shape</label>
+			<label><input type="checkbox" id="Level_Tag_Memorization" data-tag="Memorization"> Memorization</label>
+			<label><input type="checkbox" id="Level_Tag_Midspin" data-tag="Midspin"> Midspin</label>
+			<label><input type="checkbox" id="Level_Tag_Multitap" data-tag="Multitap"> Multitap</label>
+			<label><input type="checkbox" id="Level_Tag_Octagon" data-tag="Octagon"> Octagon</label>
+		</div>
+		<div class="horizontal">
+			<label><input type="checkbox" id="Level_Tag_Polyrhythm" data-tag="Polyrhythm"> Polyrhythm</label>
+			<label><input type="checkbox" id="Level_Tag_Pseudo" data-tag="Pseudo"> Pseudo</label>
+			<label><input type="checkbox" id="Level_Tag_Quintuplet" data-tag="Quintuplet"> Quintuplet</label>
+			<label><input type="checkbox" id="Level_Tag_Septuplet" data-tag="Septuplet"> Septuplet</label>
+			<label><input type="checkbox" id="Level_Tag_Swing" data-tag="Swing"> Swing</label>
+			<label><input type="checkbox" id="Level_Tag_Timing_Window_Scale" data-tag="Timing_Window_Scale"> Timing Window Scale</label>
+		</div>
+		<div class="horizontal">
+			<label><input type="checkbox" id="Level_Tag_Timing_Window_Scale_DLC" data-tag="Timing_Window_Scale_DLC"> Timing Window Scale DLC</label>
+			<label><input type="checkbox" id="Level_Tag_Tresillo" data-tag="Tresillo"> Tresillo</label>
+			<label><input type="checkbox" id="Level_Tag_Triplet" data-tag="Triplet"> Triplet</label>
+			<label><input type="checkbox" id="Level_Tag_U-Turn" data-tag="U-Turn"> U-Turn</label>
+			<label><input type="checkbox" id="Level_Tag_Zips" data-tag="Zips"> Zips</label>
+		</div>
 
-	<label>창작마당 난이도</label>
-	<div class="horizontal">
-		<select id="difficulty_workshop" name="창작마당 난이도"></select>		
-	</div>
+		<label>창작마당 난이도</label>
+		<div class="horizontal">
+			<select id="difficulty_workshop" name="창작마당 난이도"></select>		
+		</div>
 
-	<label>GG 분류</label>
-	<div class="horizontal">
-		<select id="gg_quality" name="GG 분류">
-			<option value="Listed">Listed</option>
-			<option value="Recommended">Recommended</option>
-			<option value="Legendary">Legendary</option>
-			<option value="Hidden">Hidden</option>
-			<option value="Unlisted">Unlisted</option>
-		</select>
-	</div>
+		<label>GG 분류</label>
+		<div class="horizontal">
+			<select id="gg_quality" name="GG 분류">
+				<option value="Listed">Listed</option>
+				<option value="Recommended">Recommended</option>
+				<option value="Legendary">Legendary</option>
+				<option value="Hidden">Hidden</option>
+				<option value="Unlisted">Unlisted</option>
+			</select>
+		</div>
 
-	<label>GG 난이도</label>
-	<div class="horizontal">
-		<select id="difficulty_gg" name="GG 난이도"></select>
-	</div>
+		<label>GG 난이도</label>
+		<div class="horizontal">
+			<select id="difficulty_gg" name="GG 난이도"></select>
+		</div>
 
-	<label>TUF 난이도</label>
-	<div class="horizontal">
-		<select id="difficulty_tuf" name="TUF 난이도"></select>
-	</div>
+		<label>TUF 난이도</label>
+		<div class="horizontal">
+			<select id="difficulty_tuf" name="TUF 난이도"></select>
+		</div>
 
-	<div id="tutorial-section">
-		<label>튜토리얼 <button type="button" onclick="addTutorialField()">+</button></label>
-	</div>
+		<div id="tutorial-section">
+			<label>튜토리얼 <button type="button" onclick="addTutorialField()">+</button></label>
+		</div>
 
-	<label>창작마당 링크</label>
-	<input type="checkbox" id="workshop_link_checkbox">
-	<input type="text" id="workshop_link" placeholder="창작마당 링크를 입력하세요 ex) 2353171448" style="display: none;"/>
-	<label>GG 링크</label>
-	<input type="checkbox" id="gg_link_checkbox">
-	<input type="text" id="gg_link" placeholder="GG 링크를 입력하세요 ex) 1234" style="display: none;"/>
-	<label>TUF 링크</label>
-	<input type="checkbox" id="tuf_link_checkbox">
-	<input type="text" id="tuf_link" placeholder="TUF 링크를 입력하세요 ex) 1234" style="display: none;"/>
+		<label>창작마당 링크</label>
+		<input type="checkbox" id="workshop_link_checkbox">
+		<input type="text" id="workshop_link" placeholder="창작마당 링크를 입력하세요 ex) 2353171448" style="display: none;"/>
+		<label>GG 링크</label>
+		<input type="checkbox" id="gg_link_checkbox">
+		<input type="text" id="gg_link" placeholder="GG 링크를 입력하세요 ex) 1234" style="display: none;"/>
+		<label>TUF 링크</label>
+		<input type="checkbox" id="tuf_link_checkbox">
+		<input type="text" id="tuf_link" placeholder="TUF 링크를 입력하세요 ex) 1234" style="display: none;"/>
 
-	<h2>결과</h2>	
-	<div class="horizontal">
-		<button onclick="generate()">생성</button>
-		<button onclick="copyOutput()">복사</button>
-	</div>
+		<h2>결과</h2>	
+		<div class="horizontal">
+			<button onclick="generateSingleLevelDocument()">생성</button>
+			<button onclick="copyOutput()">복사</button>
+		</div>
+
+		<script src="single-level-document.js" defer></script>
 		
-	<div id="output" style="
-	font-family: monospace;
-	white-space: pre;
-	overflow-wrap: break-word;
-	word-break: break-word;
-	"></div>
+		<div id="sld_output" style="font-family: monospace; white-space: pre; overflow-wrap: break-word; word-break: break-word;"></div>
+	</div>
+	<div id="person" style="display: none;">
+		<label>분야</label>
+		<div class="horizontal">
+			<label><input type="checkbox" id="Person_Tag_Player"> Player</label>
+			<label><input type="checkbox" id="Person_Tag_Charter"> Charter</label>
+			<label><input type="checkbox" id="Person_Tag_Camera"> Camera</label>
+			<label><input type="checkbox" id="Person_Tag_Effecter"> Effecter</label>
+			<label><input type="checkbox" id="Person_Tag_Composer"> Composer</label>
+			<label><input type="checkbox" id="Person_Tag_Developer"> Developer</label>
+			<label><input type="checkbox" id="Person_Tag_Admin"> Admin</label>
+		</div>		
+		<label>메인 닉네임</label>
+		<input type="text" id="nickname_main" placeholder="메인 닉네임을 입력하세요">
+		<label>서브 닉네임</label> <!-- information 해놓기 -->
+		<input type="text" id="nickname_sub" placeholder="서브 닉네임을 입력하세요 (없으면 비워두기)">
+		<label>국적</label>
+		<input type="text" id="whereareyoufrom" placeholder="국적을 입력하세요">
+		<label>생년월일</label>
+		<div class="horizontal">
+			<input type="text" id="birth_date_year" placeholder="YYYY">
+			<label>년</label>
+			<input type="text" id="birth_date_month" placeholder="MM">
+			<label>월</label>
+			<input type="text" id="birth_date_day" placeholder="DD">
+			<label>일</label>
+		</div>
+		<label>소셜 미디어</label>
+		<div class="horizontal">
+			<label><input type="checkbox" id="Social_Media_Youtube"> Youtube</label>
+			<label><input type="checkbox" id="Social_Media_X"> X</label>
+			<label><input type="checkbox" id="Social_Media_Soundcloud"> Soundcloud</label>			
+		</div>	
+		<label>정보 기준</label>
+		<div class="horizontal">
+			<input type="text" id="birth_date_year" placeholder="YYYY">
+			<label>년</label>
+			<input type="text" id="birth_date_month" placeholder="MM">
+			<label>월</label>
+			<input type="text" id="birth_date_day" placeholder="DD">
+			<label>일</label>
+		</div>
+		<script src="person.js" defer></script>
+		<h2>결과</h2>	
+		<div class="horizontal">
+			<button onclick="generatePerson()">생성</button>
+			<button onclick="copyOutput()">복사</button>
+		</div>
+		<div id="person_output" style="font-family: monospace; white-space: pre; overflow-wrap: break-word; word-break: break-word;"></div>
+	</div>
 
-	<script src="script.js" defer></script>
+
 </body>
 </html>
