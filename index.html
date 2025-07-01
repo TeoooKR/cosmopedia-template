@@ -241,6 +241,53 @@
 			<input type="text" id="base_date_day" placeholder="DD">
 			<label>일</label>
 		</div>
+		
+		<div id="player_information" style="display: none;">
+			<br><label class="big-label">플레이 관련 정보</label><br><br>
+			<label>주 타법</label>
+			<div class="horizontal">
+				<select id="main_tabub" placeholder="주 타법을 선택하세요">
+					<option value="-">-</option>
+					<option value="In_Out">안밖</option>
+					<option value="Out_In">밖안</option>
+					<option value="Staircase">계단</option>
+					<option value="Reverse_Staircase">역계단</option>
+					<option value="etc">기타</option>
+				    <input type="text" id="guitar_tabub" placeholder="기타 타법을 입력하세요" style="display: none;">
+				</select>
+			</div>
+
+
+			<label>클리어한 최고 레벨</label>
+			<div id="highest_level" style="display: none;">
+				<label class="small-label">작곡가</label>
+				<label class="small-label">곡</label>
+				<label class="small-label">제작자</label>
+				<label class="small-label">난이도</label>
+			</div>
+			<label>팔로워</label>
+		</div>
+		
+		<div id="level_editor_information" style="display: none;">
+			<br><label class="big-label">레벨 제작 관련 정보</label><br><br>
+			<label>단독 제작 레벨</label>
+			<label>합작 레벨</label>
+			<label>총 레벨 개수</label>
+		</div>
+		
+		<div id="composer_information" style="display: none;">
+			<br><label class="big-label">작곡 관련 정보</label><br><br>
+			<label>주 장르</label>
+			<label>곡 개수</label>
+		</div>
+
+		<div id="developer_information" style="display: none;">
+			<br><label class="big-label">개발 관련 정보</label><br><br>
+			<label>제작한 모드</label>
+			<label>제작한 모드 개수</label>
+			<label>제작한 프로그램</label>
+			<label>제작한 프로그램 개수</label>
+		</div>
 
 		<script src="person.js" defer></script>
 		<h2>결과</h2>	

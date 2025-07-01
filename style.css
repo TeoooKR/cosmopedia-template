@@ -1,6 +1,9 @@
 .big-label {
   font-size: 24px;
 }
+.small-label {
+  font-size: 8px;
+}
 input, textarea {
     display: block;
     width: 480px;
