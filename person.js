@@ -34,16 +34,61 @@
             person_tag += `,tag${person_tag_count}=${val}`;
         }
     });
+    const youtube_name = document.getElementById("youtube_name").value.trim();
+    const youtube_handle = document.getElementById("youtube_handle").value.trim();
+    let youtube_subscriber = document.getElementById("youtube_subscriber").value.trim();
+    youtube_subscriber = youtube_subscriber || "000";
+    let youtube_view = document.getElementById("youtube_view").value.trim();
+    youtube_view = youtube_view || "000,000";
+    let youtube_video = document.getElementById("youtube_video").value.trim();
+    youtube_video = youtube_video || "000";
+
+    const x_name = document.getElementById("x_name").value.trim();
+    const x_handle = document.getElementById("x_handle").value.trim();
+    let x_follower = document.getElementById("x_follower").value.trim();
+    x_follower = x_follower || "000";
+
+    const soundcloud_name = document.getElementById("soundcloud_name").value.trim();
+    const soundcloud_handle = document.getElementById("soundcloud_handle").value.trim();
+    let soundcloud_follower = document.getElementById("soundcloud_follower").value.trim();
+    soundcloud_follower = soundcloud_follower || "000";
+    let soundcloud_track = document.getElementById("soundcloud_track").value.trim();
+    soundcloud_track = soundcloud_track || "000";
+
+    let social_media_youtube = `
+||<tablealign=center><tablewidth=100%><-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://www.youtube.com/${youtube_handle}|[[파일:Youtube.png|width=25]]]] ${youtube_name} (@${youtube_handle})}}}''' ||
+||<-2> {{{-1 구독자}}}[br]'''{{{+3 ${youtube_subscriber}}}}''' ||<-2> {{{-1 조회수}}}[br]'''{{{+3 ${youtube_view}}}}''' ||<-2> {{{-1 영상 수}}}[br]'''{{{+3 ${youtube_video}}}}''' ||`;
+    let social_media_x = `
+||<-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://x.com/|[[파일:X.jpg|width=25]]]] ${x_name} (@${x_handle})}}}''' ||
+||<-6> {{{-1 팔로워}}}[br]'''{{{+3 ${x_follower}}}}''' ||`;
+    let social_media_soundcloud = `
+||<-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://soundcloud.com/|[[파일:Soundcloud.png|width=25]]]] ${soundcloud_name} (@${soundcloud_handle})}}}''' ||
+||<-3> {{{-1 팔로워}}}[br]'''{{{+3 ${soundcloud_follower}}}}''' ||<-3> {{{-1 트랙 수}}}[br]'''{{{+3 ${soundcloud_track}}}}''' ||`;
 
     let social_media = ``;
-    let social_media_youtube = `||<tablealign=center><tablewidth=100%><-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://www.youtube.com/channel/|[[파일:Youtube.png|width=25]]]] 채널명 (@핸들)}}}''' ||
-||<-2> {{{-1 구독자}}}[br]'''{{{+3 000}}}''' ||<-2> {{{-1 조회수}}}[br]'''{{{+3 000,000}}}''' ||<-2> {{{-1 영상 수}}}[br]'''{{{+3 000}}}''' ||`;
-    let social_media_x = `||<-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://x.com/|[[파일:X.jpg|width=25]]]] 계정명 (@핸들)}}}''' ||
-||<-6> {{{-1 팔로워}}}[br]'''{{{+3 000}}}''' ||`;
-    let social_media_soundcloud = `||<-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://soundcloud.com/|[[파일:Soundcloud.png|width=25]]]] 계정명 (@핸들)}}}''' ||
-||<-3> {{{-1 팔로워}}}[br]'''{{{+3 000}}}''' ||<-3> {{{-1 트랙 수}}}[br]'''{{{+3 000}}}''' ||}}} ||`;
+    if (document.getElementById("Social_Media_Youtube").checked) {
+        social_media += social_media_youtube;
+    }
+    if (document.getElementById("Social_Media_X").checked) {
+        social_media += social_media_x;
+    }
+    if (document.getElementById("Social_Media_Soundcloud").checked) {
+        social_media += social_media_soundcloud;
+    }
 
-    // 소셜 미디어 정보 인풋: 기준 년월일 인풋 / 유튜브, X, 사운드클라우드 체크박스를 체크하면 그에 맞는 인풋이 나타남. 체크박스가 체크되어있지 않으면 그 플랫폼을 아예 표시하지 않음. 셋 다 체크되어있지 않으면 소셜 미디어 정보를 표시하지 않음. 유튜브의 경우 구독자, 조회수, 영상 수, X의 경우 팔로워, 사운드클라우드의 경우 팔로워, 트랙 수.
+    const base_date_year = document.getElementById("base_date_year").value.trim();
+    const base_date_month = document.getElementById("base_date_month").value.trim();
+    const base_date_day = document.getElementById("base_date_day").value.trim();
+    let base_date_count = 0;
+    function base_date() {
+        if (base_date_count == 0) {
+            base_date_count++;
+            return `[*기준 ${base_date_year}년 ${base_date_month}월 ${base_date_day}일]`;
+        } else {
+            return `[*기준]`;
+        }
+    }
+
     // 플레이 관련 정보 인풋: 기준 년월일 인풋 / 위에서 Player가 체크되어있으면 표시. 타법 인풋(안밖/밖안/계단/역계단 선택 select), 클리어한 최고 레벨: 작곡가, 곡, 제작자, 레벨, 체감레벨(없다면 표시하지않음) 인풋.
     // 레벨 제작 관련 정보 인풋: 기준 년월일 인풋 / 위에서 Editor가 체크되어있으면 표시. 타단독 제작 레벨, 합작 레벨, 총 레벨 개수 인풋.
     // 작곡 관련 정보 인풋: 주 장르 인풋 / 곡 개수 인풋
@@ -65,19 +110,18 @@
 ||<-3>${birth_date} ||
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 인물 태그}}}}}}''' ||
 ||<-3>[include(틀:인물 태그${person_tag})] ||
-||<-4><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 소셜 미디어 정보}}}}}}'''[*기준 ○○○○년 ○○월 ○○일] ||
+||<-4><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 소셜 미디어 정보}}}}}}'''${base_date()} ||
 ||<-3>{{{#!folding [ 펼치기 • 접기 ]
-||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||
-${social_media}
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 플레이 관련 정보}}}}}}'''[*기준] ||
+||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||${social_media}}}} ||
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 플레이 관련 정보}}}}}}'''${base_date()} ||
 ||<bgcolor=#000000><color=#fff> '''주 타법''' ||<-2>○○ 타법[* 문서 주인이 ADOFAI를 플레이할 때 주로 사용하는 타법을 기재합니다.] ||
 ||<bgcolor=#000000><color=#fff> '''클리어한 최고 레벨''' ||<-2>작곡가 - 곡(제작자) [[파일: Lv .|width=30]][*체감 포럼에 등록되어있지 않으며, 이 난이도는 체감 난이도이다.(이 각주는 해당 레벨이 포럼에 공식적으로 등록되어있지 않고 이 문서의 주인인 클리어자가 직접 체감 난이도를 매겼을 시 작성합니다.)] ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작 관련 정보}}}}}}'''[*기준] ||
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작 관련 정보}}}}}}'''${base_date()} ||
 ||<width=30%> {{{-1 단독 제작 레벨}}}[br]'''{{{+3 000}}}''' ||<width=30%> {{{-1 합작 레벨}}}[br]'''{{{+3 000}}}''' ||<width=30%> {{{-1 총 레벨 개수}}}[br]'''{{{+3 000}}}''' ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 작곡 관련 정보}}}}}}'''[*기준] ||
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 작곡 관련 정보}}}}}}'''${base_date()} ||
 ||<bgcolor=#000000><color=#fff> '''주 장르''' ||<-2>○○○, ○○○, ○○○ 등 ||
 ||<bgcolor=#000000><color=#fff> '''곡 개수''' ||<-2>000[* 커스텀 레벨에 사용된 곡 문단에 서술된 곡의 수를 서술합니다.] ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 개발 관련 정보}}}}}}'''[*기준] ||
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 개발 관련 정보}}}}}}'''${base_date()} ||
 ||<bgcolor=#000000><color=#fff> '''제작한 모드 개수''' ||<-2>○○○, ○○○ 등 000개 ||
 ||<bgcolor=#000000><color=#fff> '''제작한 프로그램 개수''' ||<-2>○○○, ○○○ 등 000개 ||
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 링크}}}}}}''' ||
@@ -85,3 +129,16 @@ ${social_media}
 
     document.getElementById("person_output").textContent = result;
 }
+
+document.getElementById("Social_Media_Youtube").addEventListener("change", function () {
+    const youtube = document.getElementById("youtube");
+    youtube.style.display = this.checked ? "block" : "none";
+});
+document.getElementById("Social_Media_X").addEventListener("change", function () {
+    const youtube = document.getElementById("x");
+    youtube.style.display = this.checked ? "block" : "none";
+});
+document.getElementById("Social_Media_Soundcloud").addEventListener("change", function () {
+    const youtube = document.getElementById("soundcloud");
+    youtube.style.display = this.checked ? "block" : "none";
+});

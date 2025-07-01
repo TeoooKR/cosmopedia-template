@@ -198,15 +198,50 @@
 			<label><input type="checkbox" id="Social_Media_X"> X</label>
 			<label><input type="checkbox" id="Social_Media_Soundcloud"> Soundcloud</label>			
 		</div>	
+		<div id="youtube" style="display: none;">
+			<br><label class="big-label">유튜브 정보</label><br><br>
+			<label>채널명</label>
+			<input type="text" id="youtube_name" placeholder="유튜브 채널명을 입력하세요">
+			<label>핸들</label>
+			<input type="text" id="youtube_handle" placeholder="유튜브 핸들을 입력하세요">
+			<label>구독자</label>
+			<input type="text" id="youtube_subscriber" placeholder="유튜브 구독자를 입력하세요">
+			<label>조회수</label>
+			<input type="text" id="youtube_view" placeholder="유튜브 조회수를 입력하세요">
+			<label>영상 수</label>
+			<input type="text" id="youtube_video" placeholder="유튜브 영상 수를 입력하세요">
+		</div>
+		<div id="x" style="display: none;">
+			<br><label class="big-label">X 정보</label><br><br>
+			<label>계정명</label>
+			<input type="text" id="x_name" placeholder="X 계정명을 입력하세요">
+			<label>핸들</label>
+			<input type="text" id="x_handle" placeholder="X 핸들을 입력하세요">
+			<label>팔로워</label>
+			<input type="text" id="x_follower" placeholder="X 팔로워를 입력하세요">
+		</div>
+		<div id="soundcloud" style="display: none;">
+			<br><label class="big-label">사운드클라우드 정보</label><br><br>
+			<label>계정명</label>
+			<input type="text" id="soundcloud_name" placeholder="사운드클라우드 계정명을 입력하세요">
+			<label>핸들</label>
+			<input type="text" id="soundcloud_handle" placeholder="사운드클라우드 핸들을 입력하세요">
+			<label>팔로워</label>
+			<input type="text" id="soundcloud_follower" placeholder="사운드클라우드 팔로워를 입력하세요">
+			<label>트랙 수</label>
+			<input type="text" id="soundcloud_track" placeholder="사운드클라우드 트랙 수를 입력하세요">
+		</div>
+
 		<label>정보 기준</label>
 		<div class="horizontal">
-			<input type="text" id="birth_date_year" placeholder="YYYY">
+			<input type="text" id="base_date_year" placeholder="YYYY">
 			<label>년</label>
-			<input type="text" id="birth_date_month" placeholder="MM">
+			<input type="text" id="base_date_month" placeholder="MM">
 			<label>월</label>
-			<input type="text" id="birth_date_day" placeholder="DD">
+			<input type="text" id="base_date_day" placeholder="DD">
 			<label>일</label>
 		</div>
+
 		<script src="person.js" defer></script>
 		<h2>결과</h2>	
 		<div class="horizontal">

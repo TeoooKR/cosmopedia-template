@@ -1,3 +1,6 @@
+.big-label {
+  font-size: 24px;
+}
 input, textarea {
     display: block;
     width: 480px;
