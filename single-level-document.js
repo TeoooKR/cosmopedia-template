@@ -289,55 +289,9 @@ addOptionToWorkshop("-")
 for(let i = 1; i <= 10; i++) {
     addOptionToWorkshop(i)
 }
-const select_gg = document.getElementById("difficulty_gg");
 
-function addOptionToGG(option) {
-    const opt = document.createElement("option");
-    opt.value = opt.text = option;
-    select_gg.appendChild(opt);
-}
-addOptionToGG("-")
-for (let i = 1; i <= 17; i++) {
-    addOptionToGG(i);
-}
-["18", "18+", "19", "19+"].forEach(val => {
-    addOptionToGG(val);
-});
-for (let i = 200; i <= 226; i++) {
-    addOptionToGG((i / 10).toFixed(1));
-}
-["Unknown", "Tiny", "-1", "-2"].forEach(val => {
-    addOptionToGG(val);
-});
-
-const select_tuf = document.getElementById("difficulty_tuf");
-function addOptionToTUF(option) {
-    const opt = document.createElement("option");
-    opt.value = opt.text = option;
-    select_tuf.appendChild(opt);
-}
-
-addOptionToTUF("-");
-["P", "G", "U"].forEach(val => {
-    for (let i = 1; i <= 20; i++) {
-        addOptionToTUF(val + i);
-    }
-});
-for (let i = 1; i <= 20; i++) {
-        addOptionToTUF("U" + i + "J");
-    }
-
-for (let i = 4; i <= 8; i++) {
-    let plus = "";
-    if (i % 2 > 0) {
-        plus = "p";
-    }
-    addOptionToTUF(`Q${Math.floor(i / 2)}${plus}`);
-}
-
-["Unranked", "Qq", "Gimmick", "Censored", "Impossible", "ma", "Grande"].forEach(val => {
-    addOptionToTUF(val);
-});
+addOptionsToGG(document.getElementById("difficulty_gg"));
+addOptionsToTUF(document.getElementById("difficulty_tuf"));
 
 function addTutorialField() {
     const section = document.getElementById("tutorial-section");

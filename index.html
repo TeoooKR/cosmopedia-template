@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<script src="main.js" defer></script>
+	<script src="utils.js" defer></script>
 	<h1>코스모피디아 템플릿 생성기</h1>
 
 	<label>템플릿 선택</label>
@@ -257,13 +257,16 @@
 				</select>
 			</div>
 
-
 			<label>클리어한 최고 레벨</label>
 			<div id="highest_level" style="display: none;">
 				<label class="small-label">작곡가</label>
+				<input type="text" id="highest_level_artist" placeholder="클리어한 최고 레벨의 아티스트를 입력하세요">
 				<label class="small-label">곡</label>
+				<input type="text" id="highest_level_song_title" placeholder="클리어한 최고 레벨의 곡 제목을 입력하세요">
 				<label class="small-label">제작자</label>
+				<input type="text" id="highest_level_editor" placeholder="클리어한 최고 레벨의 제작자를 입력하세요">
 				<label class="small-label">난이도</label>
+
 			</div>
 			<label>팔로워</label>
 		</div>
