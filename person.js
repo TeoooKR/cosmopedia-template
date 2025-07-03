@@ -1,4 +1,4 @@
-﻿function generatePerson() {
+function generatePerson() {
     const nickname_main = document.getElementById("nickname_main").value.trim();
     const nickname_sub = document.getElementById("nickname_sub").value.trim();
     let nickname_bar = "";
@@ -88,10 +88,27 @@
             return `[*기준]`;
         }
     }
-
+    
+    let main_tabub = document.getElementById("main_tabub").value;
+    
+    if (main_tabub == "-") {
+        main_tabub = "○○";
+    } else if (main_tabub == "In_Out") {
+        main_tabub = "안밖";
+    } else if (main_tabub == "Out_In") {
+        main_tabub = "밖안";
+    } else if (main_tabub == "Staircase" {
+        main_tabub = "계단";
+    } else if (main_tabub == "Reverse_Staircase" {
+        main_tabub = "역계단";
+    }
+    // todo: etc
+    const highest_level_artist = document.getElementById("highest_level_artist").value;
+    const highest_level_song = document.getElementById("highest_level_song").value;
+    
     const player_information = `
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 플레이 관련 정보}}}}}}'''${base_date()} ||
-||<bgcolor=#000000><color=#fff> '''주 타법''' ||<-2>○○ 타법[* 문서 주인이 ADOFAI를 플레이할 때 주로 사용하는 타법을 기재합니다.] ||
+||<bgcolor=#000000><color=#fff> '''주 타법''' ||<-2>${main_tabub} 타법[* 문서 주인이 ADOFAI를 플레이할 때 주로 사용하는 타법을 기재합니다.] ||
 ||<bgcolor=#000000><color=#fff> '''클리어한 최고 레벨''' ||<-2>작곡가 - 곡(제작자) [[파일: Lv .|width=30]][*체감 포럼에 등록되어있지 않으며, 이 난이도는 체감 난이도이다.(이 각주는 해당 레벨이 포럼에 공식적으로 등록되어있지 않고 이 문서의 주인인 클리어자가 직접 체감 난이도를 매겼을 시 작성합니다.)] ||`;
     const level_editor_information = `
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작 관련 정보}}}}}}'''${base_date()} ||
