@@ -265,31 +265,40 @@
 				<input type="text" id="highest_level_song_title" placeholder="클리어한 최고 레벨의 곡 제목을 입력하세요">
 				<label class="small-label">제작자</label>
 				<input type="text" id="highest_level_editor" placeholder="클리어한 최고 레벨의 제작자를 입력하세요">
-				<label class="small-label">난이도</label>
-
-			</div>
-			<label>팔로워</label>
+				<label class="small-label">GG 난이도</label>
+			 <select id="highest_level_difficulty_gg" name="클리어한 최고 레벨의 GG 난이도"></select>
+		  <label class="small-label">TUF 난이도</label>
+			 <select id="highest_level_difficulty_tuf" name="클리어한 최고 레벨의 TUF 난이도"></select>
 		</div>
 		
 		<div id="level_editor_information" style="display: none;">
 			<br><label class="big-label">레벨 제작 관련 정보</label><br><br>
-			<label>단독 제작 레벨</label>
-			<label>합작 레벨</label>
+			<label>단독 제작 레벨 수</label>
+			<input type="text" id="standalone_level_created" placeholder="단독 제작 레벨의 수를 입력하세요">
+			<label>합작 레벨 수</label>
+			<input type="text" id="collab_level_created" placeholder="합작 레벨의 수를 입력하세요">
 			<label>총 레벨 개수</label>
+			<input type="text" id="total_level_created" placeholder="총 레벨의 수를 입력하세요">
 		</div>
 		
 		<div id="composer_information" style="display: none;">
 			<br><label class="big-label">작곡 관련 정보</label><br><br>
 			<label>주 장르</label>
+			<input type="text" id="main_genre" placeholder="주 장르를 입력하세요 ex) 덥스텝, 브레이크코어 스피드코어 등">
 			<label>곡 개수</label>
+			<input type="text" id="music_created" placeholder="곡 개수를 입력하세요">
 		</div>
 
 		<div id="developer_information" style="display: none;">
 			<br><label class="big-label">개발 관련 정보</label><br><br>
 			<label>제작한 모드</label>
+			<input type="text" id="created_mod_name" placeholder="제작한 모드를 입력하세요 (주요 모드만 입력합니다. ','로 구분
 			<label>제작한 모드 개수</label>
+			<input type="text" id="created_mod_count" placeholder="제작한 모드 수를 입력하세요">
 			<label>제작한 프로그램</label>
+			<input type="text" id="created_program_name" placeholder="제작한 프로그램을 입력하세요 (주요 프로그램만 입력합니다. ','로 구분
 			<label>제작한 프로그램 개수</label>
+			<input type="text" id="created_program_count" placeholder="제작한 프로그램 수를 입력하세요">
 		</div>
 
 		<script src="person.js" defer></script>
