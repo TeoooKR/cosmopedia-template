@@ -1,6 +1,6 @@
-function generatePerson() {
-    const nickname_main = document.getElementById("nickname_main").value.trim();
-    const nickname_sub = document.getElementById("nickname_sub").value.trim();
+﻿function generatePerson() {
+    const nickname_main = document.getElementById("nickname_main").value;
+    const nickname_sub = document.getElementById("nickname_sub").value;
     let nickname_bar = "";
     let nickname_parens
     if (nickname_main && nickname_sub) {
@@ -11,7 +11,7 @@ function generatePerson() {
     } else if (nickname_sub) {
         nickname_bar = nickname_parens = nickname_sub;
     }    
-    let whereareyoufrom = document.getElementById("whereareyoufrom").value.trim();
+    let whereareyoufrom = document.getElementById("whereareyoufrom").value;
     if (whereareyoufrom == "") {
         whereareyoufrom = "비공개"
     }
@@ -34,8 +34,8 @@ function generatePerson() {
             person_tag += `,tag${person_tag_count}=${val}`;
         }
     });
-    const youtube_name = document.getElementById("youtube_name").value.trim();
-    const youtube_handle = document.getElementById("youtube_handle").value.trim();
+    const youtube_name = document.getElementById("youtube_name").value;
+    const youtube_handle = document.getElementById("youtube_handle").value;
     let youtube_subscriber = document.getElementById("youtube_subscriber").value.trim();
     youtube_subscriber = youtube_subscriber || "000";
     let youtube_view = document.getElementById("youtube_view").value.trim();
@@ -43,13 +43,13 @@ function generatePerson() {
     let youtube_video = document.getElementById("youtube_video").value.trim();
     youtube_video = youtube_video || "000";
 
-    const x_name = document.getElementById("x_name").value.trim();
-    const x_handle = document.getElementById("x_handle").value.trim();
+    const x_name = document.getElementById("x_name").value.;
+    const x_handle = document.getElementById("x_handle").value;
     let x_follower = document.getElementById("x_follower").value.trim();
     x_follower = x_follower || "000";
 
-    const soundcloud_name = document.getElementById("soundcloud_name").value.trim();
-    const soundcloud_handle = document.getElementById("soundcloud_handle").value.trim();
+    const soundcloud_name = document.getElementById("soundcloud_name").value;
+    const soundcloud_handle = document.getElementById("soundcloud_handle").value;
     let soundcloud_follower = document.getElementById("soundcloud_follower").value.trim();
     soundcloud_follower = soundcloud_follower || "000";
     let soundcloud_track = document.getElementById("soundcloud_track").value.trim();
@@ -97,14 +97,14 @@ function generatePerson() {
         main_tabub = "안밖";
     } else if (main_tabub == "Out_In") {
         main_tabub = "밖안";
-    } else if (main_tabub == "Staircase" {
+    } else if (main_tabub == "Staircase") {
         main_tabub = "계단";
-    } else if (main_tabub == "Reverse_Staircase" {
+    } else if (main_tabub == "Reverse_Staircase") {
         main_tabub = "역계단";
     }
     // todo: etc
     const highest_level_artist = document.getElementById("highest_level_artist").value;
-    const highest_level_song = document.getElementById("highest_level_song").value;
+    const highest_level_song_title = document.getElementById("highest_level_song_title").value;
     
     const player_information = `
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 플레이 관련 정보}}}}}}'''${base_date()} ||
