@@ -107,48 +107,9 @@ function generateSingleLevelDocument() {
         gg_quality = ` [[파일:gg Tag ${gg_quality.toUpperCase()}.svg|width=20]]`;
     }
     let difficulty_gg = document.getElementById("difficulty_gg").value;
-    if (difficulty_gg != "-") {
-        difficulty_gg = difficulty_gg.replace("+", "p");
-        difficulty_gg = difficulty_gg.replace(".", "_");
-        difficulty_gg = difficulty_gg.replace("-", "m");
-        difficulty_gg = "[[파일:gg Lv " + difficulty_gg + ".svg|width=40]]";
-    } else {
-        difficulty_gg = "'''{{{+4 -}}}'''";
-    }
-    let difficulty_tuf = document.getElementById("difficulty_tuf").value;
-    let difficulty_tuf_legacy = "";
-    if (difficulty_tuf == "P1") {
-        difficulty_tuf_legacy = "1";
-    }
-    for (i = 2; i <= 17; i++) {
-        if (difficulty_tuf == "P" + i) {
-            difficulty_tuf_legacy = i + 1;
-        }
-    }
-    if (difficulty_tuf == "P18")  {
-        difficulty_tuf_legacy = "18p";
-    } else if (difficulty_tuf == "P19") {
-        difficulty_tuf_legacy = "19";
-    } else if (difficulty_tuf == "P20") {
-        difficulty_tuf_legacy = "19p";
-    }
-    for (let i = 1; i <= 20; i++) {
-        if (difficulty_tuf === `G${i}`) {
-            const base = Math.floor((i - 1) / 2);
-            const suffix = (i % 2 === 0) ? 'p' : '';
-            difficulty_tuf_legacy = `20_${base}${suffix}`;
-            break;
-        }
-    }
-    for (let i = 1; i <= 16; i++) {
-        if (difficulty_tuf === `U${i}` || difficulty_tuf === `U${i}J`) {
-            const g = Math.floor((i - 1) / 2);
-            const base = Math.floor(g / 2);
-            const suffix = (g % 2 === 1) ? 'p' : '';
-            difficulty_tuf_legacy = `21_${base}${suffix}`;
-            break;
-        }
-    }			
+    difficulty_gg = organizeGG(difficulty_gg)
+    let difficulty_tuf = document.getElementById("difficulty_tuf").value;    
+    let difficulty_tuf_legacy = convertPGUtoLegacy(difficulty_tuf);
     if (difficulty_tuf_legacy != "") {
         difficulty_tuf_legacy = " ([[파일:TUF Lc " + difficulty_tuf_legacy + ".png|width=30]])";
     }

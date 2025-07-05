@@ -166,6 +166,8 @@
 		
 		<div id="sld_output" style="font-family: monospace; white-space: pre; overflow-wrap: break-word; word-break: break-word;"></div>
 	</div>
+
+	<!-- ##### PERSON ##### -->
 	<div id="person" style="display: none;">
 		<label>분야</label>
 		<div class="horizontal">
@@ -244,7 +246,7 @@
 		
 		<div id="player_information" style="display: none;">
 			<br><label class="big-label">플레이 관련 정보</label><br><br>
-			<label>주 타법</label>
+			<label class="mbig-label">주 타법</label>
 			<div class="horizontal">
 				<select id="main_tabub" placeholder="주 타법을 선택하세요">
 					<option value="-">-</option>
@@ -257,18 +259,19 @@
 				</select>
 			</div>
 
-			<label>클리어한 최고 레벨</label>
-			<div id="highest_level" style="display: none;">
-				<label class="small-label">작곡가</label>
+			<label class="mbig-label">클리어한 최고 레벨</label>
+			<div id="highest_level" >
+				<label>작곡가</label>
 				<input type="text" id="highest_level_artist" placeholder="클리어한 최고 레벨의 아티스트를 입력하세요">
-				<label class="small-label">곡</label>
+				<label>곡</label>
 				<input type="text" id="highest_level_song_title" placeholder="클리어한 최고 레벨의 곡 제목을 입력하세요">
-				<label class="small-label">제작자</label>
-				<input type="text" id="highest_level_editor" placeholder="클리어한 최고 레벨의 제작자를 입력하세요 (','로 구분)">
-				<label class="small-label">GG 난이도</label>
-			 <select id="highest_level_difficulty_gg" name="클리어한 최고 레벨의 GG 난이도"></select>
-		  <label class="small-label">TUF 난이도</label>
-			 <select id="highest_level_difficulty_tuf" name="클리어한 최고 레벨의 TUF 난이도"></select>
+				<label>제작자</label>
+				<input type="text" id="highest_level_editor" placeholder="클리어한 최고 레벨의 제작자를 입력하세요 (두 명 이상일 시 '한 명 ~ 외 n인'으로 기입합니다)">
+				<label>GG 난이도</label>
+		    	<select id="highest_level_difficulty_gg" name="클리어한 최고 레벨의 GG 난이도"></select>
+		    	<label>TUF 난이도</label>
+				<select id="highest_level_difficulty_tuf" name="클리어한 최고 레벨의 TUF 난이도"></select>
+			</div>
 		</div>
 		
 		<div id="level_editor_information" style="display: none;">

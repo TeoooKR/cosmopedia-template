@@ -82,3 +82,49 @@ function addOptionsToTUF(select) {
         addOptionToTUF(val);
     });
 }
+
+function organizeGG(difficulty_gg) {
+    if (difficulty_gg != "-") {
+        difficulty_gg = difficulty_gg.replace("+", "p");
+        difficulty_gg = difficulty_gg.replace(".", "_");
+        difficulty_gg = difficulty_gg.replace("-", "m");
+        difficulty_gg = "[[파일:gg Lv " + difficulty_gg + ".svg|width=40]]";
+    } else {
+        difficulty_gg = "'''{{{+4 -}}}'''";
+    }
+    return difficulty_gg;
+}
+
+function convertPGUtoLegacy(difficulty_tuf) {
+    if (difficulty_tuf == "P1") {
+        return "1";
+    }
+    for (i = 2; i <= 17; i++) {
+        if (difficulty_tuf == "P" + i) {
+            return i + 1;
+        }
+    }
+    if (difficulty_tuf == "P18")  {
+        return "18p";
+    } else if (difficulty_tuf == "P19") {
+        return "19";
+    } else if (difficulty_tuf == "P20") {
+        return "19p";
+    }
+    for (let i = 1; i <= 20; i++) {
+        if (difficulty_tuf === `G${i}`) {
+            const base = Math.floor((i - 1) / 2);
+            const suffix = (i % 2 === 0) ? 'p' : '';
+            return `20_${base}${suffix}`;
+        }
+    }
+    for (let i = 1; i <= 16; i++) {
+        if (difficulty_tuf === `U${i}` || difficulty_tuf === `U${i}J`) {
+            const g = Math.floor((i - 1) / 2);
+            const base = Math.floor(g / 2);
+            const suffix = (g % 2 === 1) ? 'p' : '';
+            return `21_${base}${suffix}`;
+        }
+    }
+    return "";
+}

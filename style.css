@@ -1,8 +1,8 @@
 .big-label {
   font-size: 24px;
 }
-.small-label {
-  font-size: 8px;
+.mbig-label {
+  font-size: 20px;
 }
 input, textarea {
     display: block;

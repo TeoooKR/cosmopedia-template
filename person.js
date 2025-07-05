@@ -43,7 +43,7 @@
     let youtube_video = document.getElementById("youtube_video").value.trim();
     youtube_video = youtube_video || "000";
 
-    const x_name = document.getElementById("x_name").value.;
+    const x_name = document.getElementById("x_name").value;
     const x_handle = document.getElementById("x_handle").value;
     let x_follower = document.getElementById("x_follower").value.trim();
     x_follower = x_follower || "000";
@@ -91,25 +91,29 @@
     
     let main_tabub = document.getElementById("main_tabub").value;
     
-    if (main_tabub == "-") {
-        main_tabub = "○○";
-    } else if (main_tabub == "In_Out") {
-        main_tabub = "안밖";
-    } else if (main_tabub == "Out_In") {
-        main_tabub = "밖안";
-    } else if (main_tabub == "Staircase") {
-        main_tabub = "계단";
-    } else if (main_tabub == "Reverse_Staircase") {
-        main_tabub = "역계단";
+    const map = {
+        "-": "○○",
+        "In_Out": "안밖",
+        "Out_In": "밖안",
+        "Staircase": "계단",
+        "Reverse_Staircase": "역계단"
+    };
+
+    if (map[main_tabub]) {
+        main_tabub = map[main_tabub];
     }
     // todo: etc
     const highest_level_artist = document.getElementById("highest_level_artist").value;
     const highest_level_song_title = document.getElementById("highest_level_song_title").value;
+    let highest_level_difficulty_gg = document.getElementById("highest_level_difficulty_gg").value;
+    const highest_level_difficulty_tuf = document.getElementById("highest_level_difficulty_tuf").value;
+    highest_level_difficulty_gg = organizeGG(highest_level_difficulty_gg);
+    let highest_level_difficulty_tuf_legacy = convertPGUtoLegacy(highest_level_difficulty_gg);
     
     const player_information = `
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 플레이 관련 정보}}}}}}'''${base_date()} ||
 ||<bgcolor=#000000><color=#fff> '''주 타법''' ||<-2>${main_tabub} 타법[* 문서 주인이 ADOFAI를 플레이할 때 주로 사용하는 타법을 기재합니다.] ||
-||<bgcolor=#000000><color=#fff> '''클리어한 최고 레벨''' ||<-2>작곡가 - 곡(제작자) [[파일: Lv .|width=30]][*체감 포럼에 등록되어있지 않으며, 이 난이도는 체감 난이도이다.(이 각주는 해당 레벨이 포럼에 공식적으로 등록되어있지 않고 이 문서의 주인인 클리어자가 직접 체감 난이도를 매겼을 시 작성합니다.)] ||`;
+||<bgcolor=#000000><color=#fff> '''클리어한 최고 레벨''' ||<-2>[[${highest_level_song_title}/${highest_level_editor}의 레벨|${highest_level_artist} - ${highest_level_song_title}(${highest_level_editor})]] [[파일:TUF Lv U15J.png|width=30]] ||`;
     const level_editor_information = `
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작 관련 정보}}}}}}'''${base_date()} ||
 ||<width=30%> {{{-1 단독 제작 레벨}}}[br]'''{{{+3 000}}}''' ||<width=30%> {{{-1 합작 레벨}}}[br]'''{{{+3 000}}}''' ||<width=30%> {{{-1 총 레벨 개수}}}[br]'''{{{+3 000}}}''' ||`;
@@ -168,15 +172,31 @@ ${person_field_information}
     document.getElementById("person_output").textContent = result;
 }
 
-document.getElementById("Social_Media_Youtube").addEventListener("change", function () {
-    const youtube = document.getElementById("youtube");
-    youtube.style.display = this.checked ? "block" : "none";
+function showDivWhenChecked(checkbox, div) {
+    document.getElementById(`${checkbox}`).addEventListener("change", function () {
+        const element = document.getElementById(`${div}`);
+        element.style.display = this.checked ? "block" : "none";
+    });
+}
+
+[
+    { checkbox: "Social_Media_Youtube", div: "youtube" },
+    { checkbox: "Social_Media_X", div: "x" },
+    { checkbox: "Social_Media_Soundcloud", div: "soundcloud" },
+    { checkbox: "Person_Tag_Player", div: "player_information" },
+    { checkbox: "Person_Tag_Composer", div: "composer_information" },
+    { checkbox: "Person_Tag_Developer", div: "developer_information" }
+].forEach(({ checkbox, div }) => {
+    showDivWhenChecked(checkbox, div);
 });
-document.getElementById("Social_Media_X").addEventListener("change", function () {
-    const youtube = document.getElementById("x");
-    youtube.style.display = this.checked ? "block" : "none";
+
+[
+    "Person_Tag_Charter",
+    "Person_Tag_Camera",
+    "Person_Tag_Effecter"
+].forEach(checkbox => {
+    showDivWhenChecked(checkbox, "level_editor_information");
 });
-document.getElementById("Social_Media_Soundcloud").addEventListener("change", function () {
-    const youtube = document.getElementById("soundcloud");
-    youtube.style.display = this.checked ? "block" : "none";
-});
+
+addOptionsToGG(document.getElementById("highest_level_difficulty_gg"));
+addOptionsToTUF(document.getElementById("highest_level_difficulty_tuf"));
