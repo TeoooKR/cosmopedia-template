@@ -116,3 +116,11 @@ function convertPGUtoLegacy(difficulty_tuf) {
     }
     return "";
 }
+
+function addComma(str) {
+    let parts = str.split('.');
+    let intPart = parts[0];
+    let decPart = parts[1] ? '.' + parts[1] : '';
+
+    return intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + decPart;
+}

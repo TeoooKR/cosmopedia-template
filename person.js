@@ -18,10 +18,8 @@
     const birth_date_year = document.getElementById("birth_date_year").value.trim();
     const birth_date_month = document.getElementById("birth_date_month").value.trim();
     const birth_date_day = document.getElementById("birth_date_day").value.trim();
-    const birth_date_month_padded = birth_date_month.padStart(2, '0');
-    const birth_date_day_padded = birth_date_day.padStart(2, '0');
 
-    let birth_date = `${birth_date_year}년 ${birth_date_month}월 ${birth_date_day}일 ([age(${birth_date_year}-${birth_date_month_padded}-${birth_date_day_padded})]세)`
+    let birth_date = `${birth_date_year}년 ${birth_date_month}월 ${birth_date_day}일 ([age(${birth_date_year}-${birth_date_month.padStart(2, '0')}-${birth_date_day.padStart(2, '0')})]세)`
     if (birth_date_year == "" && birth_date_month == "" && birth_date_day == "") {
         birth_date = "비공개";
     }
@@ -36,33 +34,33 @@
     });
     const youtube_name = document.getElementById("youtube_name").value;
     const youtube_handle = document.getElementById("youtube_handle").value;
-    let youtube_subscriber = document.getElementById("youtube_subscriber").value.trim();
+    let youtube_subscriber = addComma(document.getElementById("youtube_subscriber").value.trim());    
     youtube_subscriber = youtube_subscriber || "000";
-    let youtube_view = document.getElementById("youtube_view").value.trim();
+    let youtube_view = addComma(document.getElementById("youtube_view").value.trim());
     youtube_view = youtube_view || "000,000";
-    let youtube_video = document.getElementById("youtube_video").value.trim();
+    let youtube_video = addComma(document.getElementById("youtube_video").value.trim());
     youtube_video = youtube_video || "000";
 
     const x_name = document.getElementById("x_name").value;
     const x_handle = document.getElementById("x_handle").value;
-    let x_follower = document.getElementById("x_follower").value.trim();
+    let x_follower = addComma(document.getElementById("x_follower").value.trim());
     x_follower = x_follower || "000";
 
     const soundcloud_name = document.getElementById("soundcloud_name").value;
     const soundcloud_handle = document.getElementById("soundcloud_handle").value;
-    let soundcloud_follower = document.getElementById("soundcloud_follower").value.trim();
+    let soundcloud_follower = addComma(document.getElementById("soundcloud_follower").value.trim());
     soundcloud_follower = soundcloud_follower || "000";
-    let soundcloud_track = document.getElementById("soundcloud_track").value.trim();
+    let soundcloud_track = addComma(document.getElementById("soundcloud_track").value.trim());
     soundcloud_track = soundcloud_track || "000";
 
     const social_media_youtube = `
 ||<tablealign=center><tablewidth=100%><-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://www.youtube.com/${youtube_handle}|[[파일:Youtube.png|width=25]]]] ${youtube_name} (@${youtube_handle})}}}''' ||
 ||<-2> {{{-1 구독자}}}[br]'''{{{+3 ${youtube_subscriber}}}}''' ||<-2> {{{-1 조회수}}}[br]'''{{{+3 ${youtube_view}}}}''' ||<-2> {{{-1 영상 수}}}[br]'''{{{+3 ${youtube_video}}}}''' ||`;
     const social_media_x = `
-||<-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://x.com/|[[파일:X.jpg|width=25]]]] ${x_name} (@${x_handle})}}}''' ||
+||<-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://x.com/${x_handle}|[[파일:X.jpg|width=25]]]] ${x_name} (@${x_handle})}}}''' ||
 ||<-6> {{{-1 팔로워}}}[br]'''{{{+3 ${x_follower}}}}''' ||`;
     const social_media_soundcloud = `
-||<-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://soundcloud.com/|[[파일:Soundcloud.png|width=25]]]] ${soundcloud_name} (@${soundcloud_handle})}}}''' ||
+||<-6><bgcolor=#000000><color=#fff><nopad>'''{{{+1 | [[https://soundcloud.com/${soundcloud_handle}|[[파일:Soundcloud.png|width=25]]]] ${soundcloud_name} (@${soundcloud_handle})}}}''' ||
 ||<-3> {{{-1 팔로워}}}[br]'''{{{+3 ${soundcloud_follower}}}}''' ||<-3> {{{-1 트랙 수}}}[br]'''{{{+3 ${soundcloud_track}}}}''' ||`;
 
     let social_media = ``;
@@ -74,20 +72,7 @@
     }
     if (document.getElementById("Social_Media_Soundcloud").checked) {
         social_media += social_media_soundcloud;
-    }
-
-    const base_date_year = document.getElementById("base_date_year").value.trim();
-    const base_date_month = document.getElementById("base_date_month").value.trim();
-    const base_date_day = document.getElementById("base_date_day").value.trim();
-    let base_date_count = 0;
-    function base_date() {
-        if (base_date_count == 0) {
-            base_date_count++;
-            return `[*기준 ${base_date_year}년 ${base_date_month}월 ${base_date_day}일]`;
-        } else {
-            return `[*기준]`;
-        }
-    }
+    }    
     
     let main_tabub = document.getElementById("main_tabub").value;
     
@@ -125,20 +110,44 @@
     }
 
     const player_information = `
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 플레이 관련 정보}}}}}}'''${base_date()} ||
-||<bgcolor=#000000><color=#fff> '''주 타법''' ||<-2>${main_tabub} 타법[* 문서 주인이 ADOFAI를 플레이할 때 주로 사용하는 타법을 기재합니다.] ||
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 플레이 관련 정보}}}}}}'''[*기준] ||
+||<bgcolor=#000000><color=#fff> '''주 타법''' ||<-2>${main_tabub} 타법 ||
 ||<bgcolor=#000000><color=#fff> '''클리어한 최고 레벨''' ||<-2>[[${highest_level_song_title}/${highest_level_editor}의 레벨|${highest_level_artist} - ${highest_level_song_title}(${highest_level_editor})]] ${highest_level_difficulty} ||`;
+
+    let standalone_level_created = addComma(document.getElementById("standalone_level_created").value);
+    standalone_level_created = standalone_level_created || "000";
+    let collab_level_created = addComma(document.getElementById("collab_level_created").value);
+    collab_level_created = collab_level_created || "000";
+    let total_level_created = addComma(document.getElementById("total_level_created").value);
+    total_level_created = total_level_created || "000";
+
     const level_editor_information = `
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작 관련 정보}}}}}}'''${base_date()} ||
-||<width=30%> {{{-1 단독 제작 레벨}}}[br]'''{{{+3 000}}}''' ||<width=30%> {{{-1 합작 레벨}}}[br]'''{{{+3 000}}}''' ||<width=30%> {{{-1 총 레벨 개수}}}[br]'''{{{+3 000}}}''' ||`;
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작 관련 정보}}}}}}'''[*기준] ||
+||<width=30%> {{{-1 단독 제작 레벨}}}[br]'''{{{+3 ${standalone_level_created}}}}''' ||<width=30%> {{{-1 합작 레벨}}}[br]'''{{{+3 ${collab_level_created}}}}''' ||<width=30%> {{{-1 총 레벨 개수}}}[br]'''{{{+3 ${total_level_created}}}}''' ||`;
+
+    let main_genre = document.getElementById("main_genre").value;
+    main_genre = main_genre || `○○○, ○○○, ○○○`;
+    let music_created = addComma(document.getElementById("music_created").value);
+    music_created = music_created || `000`;
+
     const composer_information = `
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 작곡 관련 정보}}}}}}'''${base_date()} ||
-||<bgcolor=#000000><color=#fff> '''주 장르''' ||<-2>○○○, ○○○, ○○○ 등 ||
-||<bgcolor=#000000><color=#fff> '''곡 개수''' ||<-2>000[* 커스텀 레벨에 사용된 곡 문단에 서술된 곡의 수를 서술합니다.] ||`;
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 작곡 관련 정보}}}}}}'''[*기준] ||
+||<bgcolor=#000000><color=#fff> '''주 장르''' ||<-2>${main_genre} 등 ||
+||<bgcolor=#000000><color=#fff> '''곡 개수''' ||<-2>${music_created} ||`;
+
+    let created_mod_name = document.getElementById("created_mod_name").value;
+    created_mod_name = created_mod_name || `○○○, ○○○`;
+    let created_mod_count = addComma(document.getElementById("created_mod_count").value);
+    created_mod_count = created_mod_count || `000`;
+    let created_program_name = document.getElementById("created_program_name").value;
+    created_program_name = created_program_name || `○○○, ○○○`;
+    let created_program_count = addComma(document.getElementById("created_program_count").value);
+    created_program_count = created_program_count || `000`;
+
     const developer_information = `
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 개발 관련 정보}}}}}}'''${base_date()} ||
-||<bgcolor=#000000><color=#fff> '''제작한 모드 개수''' ||<-2>○○○, ○○○ 등 000개 ||
-||<bgcolor=#000000><color=#fff> '''제작한 프로그램 개수''' ||<-2>○○○, ○○○ 등 000개 ||`;
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 개발 관련 정보}}}}}}'''[*기준] ||
+||<bgcolor=#000000><color=#fff> '''제작한 모드 개수''' ||<-2>${created_mod_name} 등 ${created_mod_count}개 ||
+||<bgcolor=#000000><color=#fff> '''제작한 프로그램 개수''' ||<-2>${created_program_name} 등 ${created_program_count}개 ||`;
 
     let person_field_information = "";
     if (document.getElementById("Person_Tag_Player").checked) {
@@ -154,34 +163,116 @@
         person_field_information += developer_information;
     }
 
-    // 플레이 관련 정보 인풋: 기준 년월일 인풋 / 위에서 Player가 체크되어있으면 표시. 타법 인풋(안밖/밖안/계단/역계단 선택 select), 클리어한 최고 레벨: 작곡가, 곡, 제작자, 레벨, 체감레벨(없다면 표시하지않음) 인풋.
-    // 레벨 제작 관련 정보 인풋: 기준 년월일 인풋 / 위에서 Editor가 체크되어있으면 표시. 타단독 제작 레벨, 합작 레벨, 총 레벨 개수 인풋.
-    // 작곡 관련 정보 인풋: 주 장르 인풋 / 곡 개수 인풋
-    // 개발 관련 정보 인풋: 제작한 모드 개수 인풋 / 제작한 프로그램 개수 인풋
-    // 주요 링크 인풋: 여러 플랫폼을 추가할 수 있게 / 링크 인풋
-    //
-    // 
-    // 조회수 구독자 이런 숫자는 자동으로 3칸마다 , 붙이기기
-    // i 아이콘으로 information 쓰기 [* ] 이런걸로 템플릿에 설명되어있는거 적어두기
+    const cosmopedia_username = document.getElementById("cosmopedia_username").value;
+    const steam_profile_id = document.getElementById("steam_profile_id").value;
+    const tuf_profile_id = document.getElementById("tuf_profile_id").value;
+    const bandcamp_profile_id = document.getElementById("bandcamp_profile_id").value;
+    const spotify_profile_id = document.getElementById("spotify_profile_id").value;
+    const apple_music_profile_id = document.getElementById("apple_music_profile_id").value;
+    const github_profile_id = document.getElementById("github_profile_id").value;
+    const discord_server_link_id = document.getElementById("discord_server_link_id").value;
+    let links = "";
+    let link_count = 0;
+    if (cosmopedia_username != "") {
+        links += `[[사용자:${cosmopedia_username}|[[파일:Role_Icon_Admin.png|width=25]]]]`
+        link_count++
+    }
+    if (document.getElementById("Social_Media_Youtube").checked) {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://www.youtube.com/@${youtube_handle}|[[파일:Youtube.png|width=25]]]]`
+        link_count++
+    }
+    if (steam_profile_id != "") {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://steamcommunity.com/profiles/${steam_profile_id}|[[파일:Steam.svg|width=25]]]]`
+        link_count++
+    }
+    if (tuf_profile_id != "") {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://tuforums.com/profile/${tuf_profile_id}|[[파일:TUF-logo.png|width=25]]]]`
+        link_count++
+    }
+    if (document.getElementById("Social_Media_X").checked) {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://x.com/${x_handle}|[[파일:X.jpg|width=25]]]]`
+        link_count++
+    }
+    if (document.getElementById("Social_Media_Soundcloud").checked) {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://soundcloud.com/${soundcloud_handle}|[[파일:Soundcloud.png|width=25]]]]`
+        link_count++
+    }
+    if (bandcamp_profile_id != "") {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://${bandcamp_profile_id}.bandcamp.com/|[[파일:Bandcamp.svg|width=25]]]]`
+        link_count++
+    }
+    if (spotify_profile_id != "") {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://open.spotify.com/artist/${spotify_profile_id}|[[파일:Spotify.svg|width=25]]]]`
+        link_count++
+    }
+    if (apple_music_profile_id != "") {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://music.apple.com/kr/artist/${apple_music_profile_id}|[[파일:apple_music_logo.png|width=25]]]]`
+        link_count++
+    }
+    if (github_profile_id != "") {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://github.com/${github_profile_id}|[[파일:GitHubDark.svg|width=25&theme=dark]]]]`
+        link_count++
+    }
+    if (discord_server_link_id != "") {
+        if (link_count > 0) {
+            links += ` | `
+        }
+        links += `[[https://discord.gg/${discord_server_link_id}|[[파일:Discord.png|width=25]]]]`
+        link_count++
+    }
 
-    const result = `||<-3><tablealign=right><tablewidth=450><bgcolor=#000000><table bordercolor=#808080><color=#fff> {{{#!wiki style="margin: -5px -10px; padding: 6px 10px; background-image: linear-gradient(to right, #ffffff, #000000, #808080)"
+    let result = `||<-3><tablealign=right><tablewidth=450><bgcolor=#000000><table bordercolor=#808080><color=#fff> {{{#!wiki style="margin: -5px -10px; padding: 6px 10px; background-image: linear-gradient(to right, #ffffff, #000000, #808080)"
 {{{#!wiki style="display: inline; text-shadow: 0 0 6px #000000; color:#fff"
 '''{{{+3 ${nickname_bar}}}}'''}}}}}} ||
 ||<-3><nopad><bgcolor=#000000> [[파일:${nickname_main} ChannelProfile.png|width=100%]] ||
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 활동명}}}}}}''' ||
 ||<-3>${nickname_parens} ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 국적}}}}}}''' ||
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 국적}}}}}}''' ||   
 ||<-3>${whereareyoufrom} ||
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 생년월일}}}}}}''' ||
 ||<-3>${birth_date} ||
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 인물 태그}}}}}}''' ||
 ||<-3>[include(틀:인물 태그${person_tag})] ||
-||<-4><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 소셜 미디어 정보}}}}}}'''${base_date()} ||
+||<-4><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 소셜 미디어 정보}}}}}}'''[*기준] ||
 ||<-3>{{{#!folding [ 펼치기 • 접기 ]
 ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||${social_media}}}} ||${person_field_information}
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 링크}}}}}}''' ||
-||<-3>[[사용자:|[[파일:Role_Icon_Admin.png|width=25]]]] | [[https://www.youtube.com/channel/|[[파일:Youtube.png|width=25]]]] | [[https://steamcommunity.com/profiles/|[[파일:Steam.svg|width=25]]]] | [[https://tuforums.com/profile/|[[파일:TUF-logo.png|width=25]]]] | [[https://x.com/|[[파일:X.jpg|width=25]]]] | [[https://soundcloud.com/|[[파일:Soundcloud.png|width=25]]]] | [[https://.bandcamp.com/|[[파일:Bandcamp.svg|width=25]]]] | [[https://open.spotify.com/artist/|[[파일:Spotify.svg|width=25]]]] | [[https://music.apple.com/kr/artist/|[[파일:apple_music_logo.png|width=25]]]] | [[https://github.com/|[[파일:GitHub.svg|width=25&theme=light]][[파일:GitHubDark.svg|width=25&theme=dark]]]] | [[https://discord.gg/|[[파일:Discord.png|width=25]]]] ||
+||<-3>${links} ||
 [clearfix]`;
+    
+    const base_date_year = document.getElementById("base_date_year").value.trim();
+    const base_date_month = document.getElementById("base_date_month").value.trim();
+    const base_date_day = document.getElementById("base_date_day").value.trim();
+    const base_date_text = `[*기준 ${base_date_year}년 ${base_date_month}월 ${base_date_day}일]`;
+    result = result.replace("[*기준]", base_date_text);
+
     document.getElementById("person_output").textContent = result;
 }
 
