@@ -107,7 +107,14 @@ function generateSingleLevelDocument() {
         gg_quality = ` [[파일:gg Tag ${gg_quality.toUpperCase()}.svg|width=20]]`;
     }
     let difficulty_gg = document.getElementById("difficulty_gg").value;
-    difficulty_gg = organizeGG(difficulty_gg)
+    if (difficulty_gg != "-") {
+        difficulty_gg = difficulty_gg.replace("+", "p");
+        difficulty_gg = difficulty_gg.replace(".", "_");
+        difficulty_gg = difficulty_gg.replace("-", "m");
+        difficulty_gg = "[[파일:gg Lv " + difficulty_gg + ".svg|width=40]]";
+    } else {
+        difficulty_gg = "'''{{{+4 -}}}'''";
+    }    
     let difficulty_tuf = document.getElementById("difficulty_tuf").value;    
     let difficulty_tuf_legacy = convertPGUtoLegacy(difficulty_tuf);
     if (difficulty_tuf_legacy != "") {

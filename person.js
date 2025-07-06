@@ -105,15 +105,29 @@
     // todo: etc
     const highest_level_artist = document.getElementById("highest_level_artist").value;
     const highest_level_song_title = document.getElementById("highest_level_song_title").value;
+    const highest_level_editor = document.getElementById("highest_level_editor").value;
     let highest_level_difficulty_gg = document.getElementById("highest_level_difficulty_gg").value;
     const highest_level_difficulty_tuf = document.getElementById("highest_level_difficulty_tuf").value;
-    highest_level_difficulty_gg = organizeGG(highest_level_difficulty_gg);
-    let highest_level_difficulty_tuf_legacy = convertPGUtoLegacy(highest_level_difficulty_gg);
-    
+    let highest_level_difficulty_tuf_legacy = convertPGUtoLegacy(highest_level_difficulty_tuf);
+    let highest_level_difficulty = "";
+    if (highest_level_difficulty_gg != "-") {
+        highest_level_difficulty_gg = highest_level_difficulty_gg.replace("+", "p");
+        highest_level_difficulty_gg = highest_level_difficulty_gg.replace(".", "_");
+        highest_level_difficulty_gg = highest_level_difficulty_gg.replace("-", "m");
+        highest_level_difficulty_gg = "[[파일:gg Lv " + highest_level_difficulty_gg + ".svg|width=30]]";
+        highest_level_difficulty += `${highest_level_difficulty_gg}`
+    }
+    if (highest_level_difficulty_tuf != "-") {
+        highest_level_difficulty += `[[파일:TUF Lv ${highest_level_difficulty_tuf}.png|width=30]]`
+    }
+    if (highest_level_difficulty_tuf_legacy != "") {
+        highest_level_difficulty += `[[파일:TUF Lc ${highest_level_difficulty_tuf_legacy}.png|width=30]]`
+    }
+
     const player_information = `
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 플레이 관련 정보}}}}}}'''${base_date()} ||
 ||<bgcolor=#000000><color=#fff> '''주 타법''' ||<-2>${main_tabub} 타법[* 문서 주인이 ADOFAI를 플레이할 때 주로 사용하는 타법을 기재합니다.] ||
-||<bgcolor=#000000><color=#fff> '''클리어한 최고 레벨''' ||<-2>[[${highest_level_song_title}/${highest_level_editor}의 레벨|${highest_level_artist} - ${highest_level_song_title}(${highest_level_editor})]] [[파일:TUF Lv U15J.png|width=30]] ||`;
+||<bgcolor=#000000><color=#fff> '''클리어한 최고 레벨''' ||<-2>[[${highest_level_song_title}/${highest_level_editor}의 레벨|${highest_level_artist} - ${highest_level_song_title}(${highest_level_editor})]] ${highest_level_difficulty} ||`;
     const level_editor_information = `
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작 관련 정보}}}}}}'''${base_date()} ||
 ||<width=30%> {{{-1 단독 제작 레벨}}}[br]'''{{{+3 000}}}''' ||<width=30%> {{{-1 합작 레벨}}}[br]'''{{{+3 000}}}''' ||<width=30%> {{{-1 총 레벨 개수}}}[br]'''{{{+3 000}}}''' ||`;
@@ -164,11 +178,10 @@
 ||<-3>[include(틀:인물 태그${person_tag})] ||
 ||<-4><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 소셜 미디어 정보}}}}}}'''${base_date()} ||
 ||<-3>{{{#!folding [ 펼치기 • 접기 ]
-||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||${social_media}}}} ||
-${person_field_information}
+||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||<nopad><width=16.66%> ||${social_media}}}} ||${person_field_information}
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 링크}}}}}}''' ||
-||<-3>[[사용자:|[[파일:Role_Icon_Admin.png|width=25]]]] | [[https://www.youtube.com/channel/|[[파일:Youtube.png|width=25]]]] | [[https://steamcommunity.com/profiles/|[[파일:Steam.svg|width=25]]]] | [[https://tuforums.com/profile/|[[파일:TUF-logo.png|width=25]]]] | [[https://x.com/|[[파일:X.jpg|width=25]]]] | [[https://soundcloud.com/|[[파일:Soundcloud.png|width=25]]]] | [[https://.bandcamp.com/|[[파일:Bandcamp.svg|width=25]]]] | [[https://open.spotify.com/artist/|[[파일:Spotify.svg|width=25]]]] | [[https://music.apple.com/kr/artist/|[[파일:apple_music_logo.png|width=25]]]] | [[https://github.com/|[[파일:GitHub.svg|width=25&theme=light]][[파일:GitHubDark.svg|width=25&theme=dark]]]] | [[https://discord.gg/|[[파일:Discord.png|width=25]]]] ||`;
-
+||<-3>[[사용자:|[[파일:Role_Icon_Admin.png|width=25]]]] | [[https://www.youtube.com/channel/|[[파일:Youtube.png|width=25]]]] | [[https://steamcommunity.com/profiles/|[[파일:Steam.svg|width=25]]]] | [[https://tuforums.com/profile/|[[파일:TUF-logo.png|width=25]]]] | [[https://x.com/|[[파일:X.jpg|width=25]]]] | [[https://soundcloud.com/|[[파일:Soundcloud.png|width=25]]]] | [[https://.bandcamp.com/|[[파일:Bandcamp.svg|width=25]]]] | [[https://open.spotify.com/artist/|[[파일:Spotify.svg|width=25]]]] | [[https://music.apple.com/kr/artist/|[[파일:apple_music_logo.png|width=25]]]] | [[https://github.com/|[[파일:GitHub.svg|width=25&theme=light]][[파일:GitHubDark.svg|width=25&theme=dark]]]] | [[https://discord.gg/|[[파일:Discord.png|width=25]]]] ||
+[clearfix]`;
     document.getElementById("person_output").textContent = result;
 }
 

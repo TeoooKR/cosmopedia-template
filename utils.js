@@ -83,18 +83,6 @@ function addOptionsToTUF(select) {
     });
 }
 
-function organizeGG(difficulty_gg) {
-    if (difficulty_gg != "-") {
-        difficulty_gg = difficulty_gg.replace("+", "p");
-        difficulty_gg = difficulty_gg.replace(".", "_");
-        difficulty_gg = difficulty_gg.replace("-", "m");
-        difficulty_gg = "[[파일:gg Lv " + difficulty_gg + ".svg|width=40]]";
-    } else {
-        difficulty_gg = "'''{{{+4 -}}}'''";
-    }
-    return difficulty_gg;
-}
-
 function convertPGUtoLegacy(difficulty_tuf) {
     if (difficulty_tuf == "P1") {
         return "1";
