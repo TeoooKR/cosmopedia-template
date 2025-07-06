@@ -254,7 +254,7 @@
 ||<-3><nopad><bgcolor=#000000> [[파일:${nickname_main} ChannelProfile.png|width=100%]] ||
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 활동명}}}}}}''' ||
 ||<-3>${nickname_parens} ||
-||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 국적}}}}}}''' ||   
+||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 국적}}}}}}''' ||
 ||<-3>${whereareyoufrom} ||
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 생년월일}}}}}}''' ||
 ||<-3>${birth_date} ||
