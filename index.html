@@ -15,6 +15,7 @@
 		<option value="person" data-output="person_output">인물</option>
 	</select>
 	
+	<!-- ##### SINGLE LEVEL DOCUMENT ##### -->
 	<div id="single_level_document">
 		<label>곡 제목</label>
 		<input type="text" id="song_title" placeholder="곡 제목을 입력하세요">
@@ -305,24 +306,14 @@
 			<label>제작한 프로그램 개수</label>
 			<input type="text" id="created_program_count" placeholder="제작한 프로그램 수를 입력하세요">
 		</div>
+		
+		<label>주요 링크 <button type="button" onclick="addLinkField()">+</button></label>
+		<div id="link-section"></div>
+
+
 
 		<label class="big-label">주요 링크(없는 항목은 비워두기)</label>
-		<br><label>코스모피디아 사용자명</label>
-		<input type="text" id="cosmopedia_username" placeholder="코스모피디아 사용자명을 입력하세요">
-		<label>Steam 프로필 아이디</label>
-		<input type="text" id="steam_profile_id" placeholder="Steam 프로필 아이디를 입력하세요 ex) 76561198983390484">
-		<label>TUF 프로필 아이디</label>
-		<input type="text" id="tuf_profile_id" placeholder="TUF 프로필 아이디를 입력하세요 ex) 25">
-		<label>Bandcamp 프로필 아이디</label>
-		<input type="text" id="bandcamp_profile_id" placeholder="Bandcamp 프로필 아이디를 입력하세요 (.bandcamp.com 앞에 붙는 것)">
-		<label>Spotify 프로필 아이디</label>
-		<input type="text" id="spotify_profile_id" placeholder="Spotify 프로필 아이디를 입력하세요 ex) 6NVMzVjhJiHrjpx6yyNQ5i">
-		<label>Apple Music 프로필 아이디</label>
-		<input type="text" id="apple_music_profile_id" placeholder="Apple Music 프로필 아이디를 입력하세요 ex) ああああ/951421785">
-		<label>Github 프로필 아이디</label>
-		<input type="text" id="github_profile_id" placeholder="Github 프로필 아이디를 입력하세요 ex) TeoooKR">
-		<label>디스코드 서버 링크 아이디</label>
-		<input type="text" id="discord_server_link_id" placeholder="디스코드 서버 링크 아이디를 입력하세요 ex) z4BpGDFDY7">
+
 
 		<script src="person.js" defer></script>
 		<h2>결과</h2>	

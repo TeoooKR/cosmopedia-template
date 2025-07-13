@@ -164,91 +164,71 @@
     if (document.getElementById("Person_Tag_Developer").checked) {
         person_field_information += developer_information;
     }
-
-    const cosmopedia_username = document.getElementById("cosmopedia_username").value;
-    const steam_profile_id = document.getElementById("steam_profile_id").value;
-    const tuf_profile_id = document.getElementById("tuf_profile_id").value;
-    const bandcamp_profile_id = document.getElementById("bandcamp_profile_id").value;
-    const spotify_profile_id = document.getElementById("spotify_profile_id").value;
-    const apple_music_profile_id = document.getElementById("apple_music_profile_id").value;
-    const github_profile_id = document.getElementById("github_profile_id").value;
-    const discord_server_link_id = document.getElementById("discord_server_link_id").value;
+   
     let links = "";
     let link_count = 0;
-    if (cosmopedia_username != "") {
-        links += `[[사용자:${cosmopedia_username}|[[파일:Role_Icon_Admin.png|width=25]]]]`
-        link_count++
+
+    const platformMap = {
+        "YouTube": { icon: "Youtube.png" },
+        "X": { icon: "X.jpg" },
+        "Soundcloud": { icon: "Soundcloud.png" },
+        "Cosmopedia": { icon: "Role_Icon_Admin.png" },
+        "Steam": { icon: "Steam.svg" },
+        "TUF": { icon: "TUF-logo.png" },
+        "Bandcamp": { icon: "Bandcamp.svg" },
+        "Spotify": { icon: "Spotify.svg" },
+        "Apple Music": { icon: "apple_music_logo.png" },
+        "Github": { icon: "GitHubDark.svg", extra: "&theme=dark" },
+        "Discord": { icon: "Discord.png" }
+    };
+
+    if (document.getElementById("Social_Media_Youtube").checked && youtube_handle) {
+        if (link_count > 0) links += " | ";
+        links += `[[https://www.youtube.com/@${youtube_handle}|[[파일:Youtube.png|width=25]]]]`;
+        link_count++;
     }
-    if (document.getElementById("Social_Media_Youtube").checked) {
-        if (link_count > 0) {
-            links += ` | `
+    if (document.getElementById("Social_Media_X").checked && x_handle) {
+        if (link_count > 0) links += " | ";
+        links += `[[https://x.com/${x_handle}|[[파일:X.jpg|width=25]]]]`;
+        link_count++;
+    }
+    if (document.getElementById("Social_Media_Soundcloud").checked && soundcloud_handle) {
+        if (link_count > 0) links += " | ";
+        links += `[[https://soundcloud.com/${soundcloud_handle}|[[파일:Soundcloud.png|width=25]]]]`;
+        link_count++;
+    }
+
+    document.querySelectorAll(".custom-link-wrapper").forEach(wrapper => {
+        let platform = wrapper.querySelector(".custom-link-platform").value;
+        if (platform === "기타") {
+            platform = wrapper.querySelector(".custom-platform-name").value.trim();
         }
-        links += `[[https://www.youtube.com/@${youtube_handle}|[[파일:Youtube.png|width=25]]]]`
-        link_count++
-    }
-    if (steam_profile_id != "") {
-        if (link_count > 0) {
-            links += ` | `
+
+        let url = wrapper.querySelector(".custom-link-url").value.trim();
+
+        if (!url) {
+            if (platform === "YouTube" && document.getElementById("Social_Media_Youtube").checked && youtube_handle) {
+                url = `https://www.youtube.com/@${youtube_handle}`;
+            } else if (platform === "X" && document.getElementById("Social_Media_X").checked && x_handle) {
+                url = `https://x.com/${x_handle}`;
+            } else if (platform === "Soundcloud" && document.getElementById("Social_Media_Soundcloud").checked && soundcloud_handle) {
+                url = `https://soundcloud.com/${soundcloud_handle}`;
+            }
         }
-        links += `[[https://steamcommunity.com/profiles/${steam_profile_id}|[[파일:Steam.svg|width=25]]]]`
-        link_count++
-    }
-    if (tuf_profile_id != "") {
-        if (link_count > 0) {
-            links += ` | `
+
+        if (!platform || !url) return;
+
+        if (link_count > 0) links += " | ";
+
+        if (platformMap[platform]) {
+            const { icon, extra = "" } = platformMap[platform];
+            links += `[[${url}|[[파일:${icon}|width=25${extra}]]]]`;
+        } else {
+            links += `[[${url}|${platform}]]`;
         }
-        links += `[[https://tuforums.com/profile/${tuf_profile_id}|[[파일:TUF-logo.png|width=25]]]]`
-        link_count++
-    }
-    if (document.getElementById("Social_Media_X").checked) {
-        if (link_count > 0) {
-            links += ` | `
-        }
-        links += `[[https://x.com/${x_handle}|[[파일:X.jpg|width=25]]]]`
-        link_count++
-    }
-    if (document.getElementById("Social_Media_Soundcloud").checked) {
-        if (link_count > 0) {
-            links += ` | `
-        }
-        links += `[[https://soundcloud.com/${soundcloud_handle}|[[파일:Soundcloud.png|width=25]]]]`
-        link_count++
-    }
-    if (bandcamp_profile_id != "") {
-        if (link_count > 0) {
-            links += ` | `
-        }
-        links += `[[https://${bandcamp_profile_id}.bandcamp.com/|[[파일:Bandcamp.svg|width=25]]]]`
-        link_count++
-    }
-    if (spotify_profile_id != "") {
-        if (link_count > 0) {
-            links += ` | `
-        }
-        links += `[[https://open.spotify.com/artist/${spotify_profile_id}|[[파일:Spotify.svg|width=25]]]]`
-        link_count++
-    }
-    if (apple_music_profile_id != "") {
-        if (link_count > 0) {
-            links += ` | `
-        }
-        links += `[[https://music.apple.com/kr/artist/${apple_music_profile_id}|[[파일:apple_music_logo.png|width=25]]]]`
-        link_count++
-    }
-    if (github_profile_id != "") {
-        if (link_count > 0) {
-            links += ` | `
-        }
-        links += `[[https://github.com/${github_profile_id}|[[파일:GitHubDark.svg|width=25&theme=dark]]]]`
-        link_count++
-    }
-    if (discord_server_link_id != "") {
-        if (link_count > 0) {
-            links += ` | `
-        }
-        links += `[[https://discord.gg/${discord_server_link_id}|[[파일:Discord.png|width=25]]]]`
-        link_count++
-    }
+
+        link_count++;
+    });
 
     let result = `||<-3><tablealign=right><tablewidth=450><bgcolor=#000000><table bordercolor=#808080><color=#fff> {{{#!wiki style="margin: -5px -10px; padding: 6px 10px; background-image: linear-gradient(to right, #ffffff, #000000, #808080)"
 {{{#!wiki style="display: inline; text-shadow: 0 0 6px #000000; color:#fff"
@@ -306,3 +286,40 @@ function showDivWhenChecked(checkbox, div) {
 
 addOptionsToGG(document.getElementById("highest_level_difficulty_gg"));
 addOptionsToTUF(document.getElementById("highest_level_difficulty_tuf"));
+
+function addLinkField() {
+    const section = document.getElementById("link-section");
+    const wrapper = document.createElement("div");
+    wrapper.className = "custom-link-wrapper";
+    wrapper.style.marginBottom = "10px";
+
+    wrapper.innerHTML = `
+    <div class="horizontal">
+        <select class="custom-link-platform" onchange="toggleCustomPlatform(this)">
+            <option value="Cosmopedia">Cosmopedia</option>
+            <option value="Steam">Steam</option>
+            <option value="TUF">TUF</option>
+            <option value="Bandcamp">Bandcamp</option>
+            <option value="Spotify">Spotify</option>
+            <option value="Apple Music">Apple Music</option>
+            <option value="Github">Github</option>
+            <option value="Discord">Discord</option>
+            <option value="기타">기타</option>
+        </select>
+        <input type="text" class="custom-platform-name" placeholder="플랫폼 선택" style="display: none;">
+        <input type="text" class="custom-link-url" placeholder="링크 입력">
+        <button type="button" onclick="removeLinkField(this)">x</button>
+    </div>
+    `;
+
+    section.appendChild(wrapper);
+}
+
+function toggleCustomPlatform(select) {
+    const customInput = select.parentElement.querySelector(".custom-platform-name");
+    customInput.style.display = select.value === "기타" ? "inline-block" : "none";
+}
+
+function removeLinkField(button) {
+    button.closest(".custom-link-wrapper").remove();
+}

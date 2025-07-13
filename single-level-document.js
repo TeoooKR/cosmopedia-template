@@ -143,20 +143,18 @@ function generateSingleLevelDocument() {
 ||<-12>${tutorialRows} ||\n`;
     }
 
-
     let link = ""
-    let link_count = 0;
     if (document.getElementById("workshop_link_checkbox").checked) {
         link_count++
-        link += `,space${link_count}= | ,steam=${document.getElementById("workshop_link")?.value.trim() || ""}`
+        link += `,space1= | ,steam=${document.getElementById("workshop_link")?.value.trim() || ""}`
     }
     if (document.getElementById("gg_link_checkbox").checked) {
         link_count++
-        link += `,space${link_count}= | ,gg=${document.getElementById("gg_link")?.value.trim() || ""}`
+        link += `,space2= | ,gg=${document.getElementById("gg_link")?.value.trim() || ""}`
     }
     if (document.getElementById("tuf_link_checkbox").checked) {
         link_count++
-        link += `,space${link_count}= | ,tuf=${document.getElementById("tuf_link")?.value.trim() || ""}`
+        link += `,space3= | ,tuf=${document.getElementById("tuf_link")?.value.trim() || ""}`
     }
     
     const result = `[include(틀:상위 문서,up=${song_title})]
