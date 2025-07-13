@@ -306,8 +306,8 @@ function addLinkField() {
             <option value="Discord">Discord</option>
             <option value="기타">기타</option>
         </select>
-        <input type="text" class="custom-platform-name" placeholder="플랫폼 선택" style="display: none;">
-        <input type="text" class="custom-link-url" placeholder="링크 입력">
+        <input type="text" class="custom-platform-name" placeholder="플랫폼 입력" style="display: none;" style="flex: 1; max-width: 100px;">
+        <input type="text" class="custom-link-url" placeholder="링크 입력" style="flex: 1; max-width: 400px;">
         <button type="button" onclick="removeLinkField(this)">x</button>
     </div>
     `;

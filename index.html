@@ -219,7 +219,7 @@
 			<label>계정명</label>
 			<input type="text" id="x_name" placeholder="X 계정명을 입력하세요">
 			<label>핸들</label>
-			<input type="text" id="x_handle" placeholder="X 핸들을 입력하세요">
+			<input type="text" id="x_handle" placeholder="X 핸들을 입력하세요 (@ 없이)">
 			<label>팔로워</label>
 			<input type="text" id="x_follower" placeholder="X 팔로워를 입력하세요">
 		</div>
@@ -228,7 +228,7 @@
 			<label>계정명</label>
 			<input type="text" id="soundcloud_name" placeholder="사운드클라우드 계정명을 입력하세요">
 			<label>핸들</label>
-			<input type="text" id="soundcloud_handle" placeholder="사운드클라우드 핸들을 입력하세요">
+			<input type="text" id="soundcloud_handle" placeholder="사운드클라우드 핸들을 입력하세요 (@ 없이)">
 			<label>팔로워</label>
 			<input type="text" id="soundcloud_follower" placeholder="사운드클라우드 팔로워를 입력하세요">
 			<label>트랙 수</label>
@@ -307,13 +307,8 @@
 			<input type="text" id="created_program_count" placeholder="제작한 프로그램 수를 입력하세요">
 		</div>
 		
-		<label>주요 링크 <button type="button" onclick="addLinkField()">+</button></label>
+		<label>주요 링크(Youtube, X, Soundcloud는 기입하지 마세요) <button type="button" onclick="addLinkField()">+</button></label>
 		<div id="link-section"></div>
-
-
-
-		<label class="big-label">주요 링크(없는 항목은 비워두기)</label>
-
 
 		<script src="person.js" defer></script>
 		<h2>결과</h2>	
@@ -323,7 +318,5 @@
 		</div>
 		<div id="person_output" style="font-family: monospace; white-space: pre; overflow-wrap: break-word; word-break: break-word;"></div>
 	</div>
-
-
 </body>
 </html>
