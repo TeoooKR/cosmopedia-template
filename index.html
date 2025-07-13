@@ -30,12 +30,20 @@
 			<label><input type="checkbox" id="include_streammod"> YouTubeStream Mod 필요 포함</label>
 		</div>
 
-		<label>유튜브 영상 아이디</label>
+		<label>레벨 쇼케이스 유튜브 영상 아이디</label>
 		<input type="text" id="youtube_video_id" placeholder="유튜브 영상 아이디를 입력하세요 ex) dQw4w9WgXcQ">
 
-		<label>제작자 <button type="button" onclick="addRoleField()">+</button></label>
-		<div id="creator-section"></div>
-
+		<label>합작 레벨</label>
+		<input type="checkbox" id="is_collab">
+		<label>제작자</label><br>
+		<div id="editor">			
+			<input type="text" id="standalone_editor" placeholder="제작자를 입력하세요">
+		</div>		
+		<div style="display: none;" id="collab">
+			<button type="button" onclick="addRoleField()">+</button>
+			<div id="creator-section"></div>
+		</div>
+		
 		<label>출시일</label>
 		<div class="horizontal">
 			<input type="text" id="release_date_year" placeholder="YYYY">
@@ -46,7 +54,7 @@
 			<label>일</label>
 		</div>
 
-		<label>곡 길이</label>
+		<label>곡 길이</label>	
 		<div class="horizontal">
 			<input type="text" id="song_length_minute" />
 			<label>분</label>
@@ -57,7 +65,7 @@
 		<label>BPM</label>
 		<input type="text" id="bpm" placeholder="기본 BPM을 입력하세요(변속은 'OOO ~ OOO'로 표시)">
 
-		<label> 상세 변속</label>
+		<label>상세 변속 '→' 복사해서 쓰세요</label>
 		<input type="checkbox" id="detailed_shift">
 		<div id="detailed_shift_input" style="display: none;">
 			<input type="text" id="detailed_shift_text" placeholder="상세 변속을 입력하세요 ex) 120 → 160 → 180" />

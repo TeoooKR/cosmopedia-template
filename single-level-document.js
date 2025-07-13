@@ -18,24 +18,29 @@ function generateSingleLevelDocument() {
     const youtube_video_id = document.getElementById("youtube_video_id").value;
     const creatorWrappers = document.querySelectorAll(".role-wrapper");
     let editor = "";
+    const standalone_editor = document.getElementById("standalone_editor").value;
 
-    creatorWrappers.forEach(wrapper => {
-        const select = wrapper.querySelector("select");
-        const customRole = wrapper.querySelector(".custom-role").value.trim();
-        const role = select.value === "custom" ? customRole : select.value;
+    if (!document.getElementById("is_collab").checked) {
+        editor = `||<-12>${standalone_editor} ||\n`;
+    } else {
+        creatorWrappers.forEach(wrapper => {
+            const select = wrapper.querySelector("select");
+            const customRole = wrapper.querySelector(".custom-role").value.trim();
+            const role = select.value === "custom" ? customRole : select.value;
 
-        const rawNames = wrapper.querySelector(".creator-names").value;
-        const names = rawNames
-            .split(",")
-            .map(name => name.trim())
-            .filter(name => name.length > 0)
-            .map(name => `[[${name}]]`);
+            const rawNames = wrapper.querySelector(".creator-names").value;
+            const names = rawNames
+                .split(",")
+                .map(name => name.trim())
+                .filter(name => name.length > 0)
+                .map(name => `[[${name}]]`);
 
-        if (role && names.length > 0) {
-            editor += `||<bgcolor=#000000><color=#FFFFFF> '''${role}''' ||<-8>${names.join(", ")} ||\n`;
-        }
-    });
-
+            if (role && names.length > 0) {
+                editor += `||<bgcolor=#000000><color=#FFFFFF> '''${role}''' ||<-8>${names.join(", ")} ||\n`;
+            }
+        });
+    }
+    
     const release_date_year = document.getElementById("release_date_year").value;
     const release_date_month = document.getElementById("release_date_month").value;
     const release_date_day = document.getElementById("release_date_day").value;
@@ -145,15 +150,12 @@ function generateSingleLevelDocument() {
 
     let link = ""
     if (document.getElementById("workshop_link_checkbox").checked) {
-        link_count++
         link += `,space1= | ,steam=${document.getElementById("workshop_link")?.value.trim() || ""}`
     }
     if (document.getElementById("gg_link_checkbox").checked) {
-        link_count++
         link += `,space2= | ,gg=${document.getElementById("gg_link")?.value.trim() || ""}`
     }
     if (document.getElementById("tuf_link_checkbox").checked) {
-        link_count++
         link += `,space3= | ,tuf=${document.getElementById("tuf_link")?.value.trim() || ""}`
     }
     
@@ -163,7 +165,6 @@ function generateSingleLevelDocument() {
 '''{{{+4 ${song_title}}}}'''[br]{{{+1 ${artist}}}}[br]${includes}}}}}}} ||
 ||<-12><bgcolor=#000000><nopad> [youtube(${youtube_video_id},width=675,height=380)] ||
 ||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 제작자}}}}}}''' ||
-||<-12>제작자 ||
 ${editor}||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 출시일}}}}}}''' ||
 ||<-12>${release_date_year}년 ${release_date_month}월 ${release_date_day}일 ||
 ||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 레벨 정보}}}}}}''' ||
@@ -177,6 +178,18 @@ ${tutorialBlock}||<-12><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 주요 링크}
 
     document.getElementById("sld_output").textContent = result;
 }
+
+document.getElementById("is_collab").addEventListener("change", function () {
+    const collab = document.getElementById("collab");
+    const editor = document.getElementById("editor");
+    if (this.checked) {
+        collab.style.display = "block";
+        editor.style.display = "none";
+    } else {
+        collab.style.display = "none";
+        editor.style.display = "block";
+    }
+});
 
 let roleCount = 0;
 const defaultRoles = ["트랙", "이펙트", "custom"];
