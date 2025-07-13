@@ -124,3 +124,14 @@ function addComma(str) {
 
     return intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + decPart;
 }
+
+function fillTodayDate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+
+    document.getElementById("base_date_year").value = year;
+    document.getElementById("base_date_month").value = month;
+    document.getElementById("base_date_day").value = day;
+}

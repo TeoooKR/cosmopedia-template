@@ -235,6 +235,7 @@
 		</div>
 
 		<label>정보 기준</label>
+		<button onclick="fillTodayDate()">오늘 날짜 채우기</button>
 		<div class="horizontal">
 			<input type="text" id="base_date_year" placeholder="YYYY">
 			<label>년</label>
@@ -285,6 +286,8 @@
 		
 		<div id="composer_information" style="display: none;">
 			<br><label class="big-label">작곡 관련 정보</label><br><br>
+			<label>사용 DAW</label>
+			<input type="text" id="daw" placeholder="사용 DAW를 입력하세요">
 			<label>주 장르</label>
 			<input type="text" id="main_genre" placeholder="주 장르를 입력하세요 (주요 장르만 입력합니다)">
 			<label>곡 개수</label>

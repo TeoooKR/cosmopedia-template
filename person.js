@@ -87,7 +87,7 @@
     if (map[main_tabub]) {
         main_tabub = map[main_tabub];
     }
-    // todo: etc
+
     const highest_level_artist = document.getElementById("highest_level_artist").value;
     const highest_level_song_title = document.getElementById("highest_level_song_title").value;
     const highest_level_editor = document.getElementById("highest_level_editor").value;
@@ -129,9 +129,11 @@
     main_genre = main_genre || `○○○, ○○○, ○○○`;
     let music_created = addComma(document.getElementById("music_created").value);
     music_created = music_created || `000`;
+    let daw = document.getElementById("daw").value;
 
     const composer_information = `
 ||<-3><bgcolor=#000000><nopad>'''{{{+1 {{{#fff | 작곡 관련 정보}}}}}}'''[*기준] ||
+||<bgcolor=#000000><color=#fff> '''사용 DAW''' ||<-2>${daw} ||
 ||<bgcolor=#000000><color=#fff> '''주 장르''' ||<-2>${main_genre} 등 ||
 ||<bgcolor=#000000><color=#fff> '''곡 개수''' ||<-2>${music_created} ||`;
 
